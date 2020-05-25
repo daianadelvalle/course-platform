@@ -1,4 +1,7 @@
 package ar.com.ada.courseplatform.model.mapper;
 
-public interface CourseMapper {
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring", uses = {})
+public interface CourseMapper extends CycleDataMapper {
 }
