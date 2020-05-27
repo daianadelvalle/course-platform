@@ -27,7 +27,7 @@ public class StudentHasCourse implements Serializable {
     @Column(name = "type_of_request", nullable = false, length = 50)
     private String typeOfRequest;
 
-    //aprobada o desaprovada la solicitud
+    //aprobada o desaprovada la solicitud de cupo
     @Column(name = "approval_status", nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean approvalStatus;
 
