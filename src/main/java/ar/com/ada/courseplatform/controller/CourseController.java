@@ -17,7 +17,7 @@ public class CourseController {
 
     @Autowired
     @Qualifier("courseServices")
-    private CourseServices courseServices;
+    private CourseServices courseServices; //couseServices
 
     @GetMapping({ "", "/" }) // localhost:8080/courses y localhost:8080/courses/ [GET]
     public ResponseEntity getAllCourses() {

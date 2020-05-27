@@ -12,12 +12,14 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/socio-economic-study")
+@RequestMapping("/socio-economic-study") //socio
 public class SocioEconomicStudyController {
 
     @Autowired
     @Qualifier("socioEconomicStudyServices")
     private SocioEconomicStudyServices socioEconomicStudyServices;
+
+    private
 
     @GetMapping({ "", "/" }) // localhost:8080/socio-economic-study y localhost:8080/socio-economic-study/ [GET]
     public ResponseEntity getAllSocioEconomicStudy() {

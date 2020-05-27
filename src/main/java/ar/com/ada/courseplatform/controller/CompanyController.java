@@ -19,6 +19,8 @@ public class CompanyController {
     @Qualifier("companyServices")
     private CompanyService companyService;
 
+    private 
+
     @GetMapping({ "", "/" }) // localhost:8080/companies y localhost:8080/companies/
     public ResponseEntity getAllCompanies() {
         List<CompanyDTO> all = companyService.findAll();

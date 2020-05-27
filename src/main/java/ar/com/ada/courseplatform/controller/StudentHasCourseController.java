@@ -29,7 +29,10 @@ public class StudentHasCourseController {
     public ResponseEntity getStudentHasCourseById(@PathVariable Long id) {
         StudentHasCourseDTO studentHasCourseById = studentHasCourseServices.findStudentHasCourseById(id);
         return ResponseEntity.ok(studentHasCourseById);
+
     }
+
+    private
 
     @PostMapping({ "", "/" }) // localhost:8080/students-has-courses y localhost:8080/students-has-courses/ [POST]
     public ResponseEntity addNewStudentHasCourse(@Valid @RequestBody StudentHasCourseDTO studentHasCourseDTO) throws URISyntaxException {

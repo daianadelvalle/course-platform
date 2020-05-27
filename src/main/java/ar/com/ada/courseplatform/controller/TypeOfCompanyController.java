@@ -19,6 +19,8 @@ public class TypeOfCompanyController {
     @Qualifier("managerServices")
     private TypeOfCompanyServices typeOfCompanyServices;
 
+    private
+
     @GetMapping({ "", "/" }) // localhost:8080/type-of-companies y localhost:8080/type-of-companies/ [GET]
     public ResponseEntity getAllTypeOfCompany() {
         List<TypeOfCompanyDTO> all = typeOfCompanyServices.findAll();

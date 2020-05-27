@@ -17,7 +17,7 @@ public class ManagerController {
 
     @Autowired
     @Qualifier("managerServices")
-    private ManagerServices managerServices;
+    private ManagerServices managerServices; //manager
 
     @GetMapping({ "", "/" }) // localhost:8080/managers y localhost:8080/managers/ [GET]
     public ResponseEntity getAllManagers() {
