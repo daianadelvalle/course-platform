@@ -2,6 +2,8 @@ package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
 import ar.com.ada.courseplatform.model.dto.TypeOfCompanyDTO;
+import ar.com.ada.courseplatform.model.mapper.circular.dependency.CycleAvoidingMappingContext;
+import ar.com.ada.courseplatform.model.mapper.circular.dependency.TypeOfCompanyCycleMapper;
 import ar.com.ada.courseplatform.model.repository.TypeOfCompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

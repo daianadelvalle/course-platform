@@ -2,6 +2,9 @@ package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
 import ar.com.ada.courseplatform.model.dto.CourseDTO;
+import ar.com.ada.courseplatform.model.entity.Course;
+import ar.com.ada.courseplatform.model.mapper.circular.dependency.CourseCycleMapper;
+import ar.com.ada.courseplatform.model.mapper.circular.dependency.CycleAvoidingMappingContext;
 import ar.com.ada.courseplatform.model.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,7 +29,9 @@ public class CourseServices implements Services<CourseDTO> {
 
     @Override
     public List<CourseDTO> findAll() {
-        return null;
+        List<Course> courseEntityList = courseRepository.findAll();
+        List<CourseDTO> courseDTOList = courseCycleMapper.toDto(courseEntityList, context);
+        return courseDTOList;
     }
 
     @Override
@@ -37,5 +42,27 @@ public class CourseServices implements Services<CourseDTO> {
     @Override
     public void delete(Long id) {
 
+    }
+
+    public List<CourseDTO> findAllAvailables() {
+        List<Course> courseEntityList = (List<Course>) courseRepository.findAll()
+                .stream().filter(course -> course.getQuota() != course.getDirectAward() + course.getScolarshipAccountant());
+        List<CourseDTO> courseDTOList = courseCycleMapper.toDto(courseEntityList, context);
+        return courseDTOList;
+    }
+
+    public List<CourseDTO> findAllCourseForCategory() {
+    }
+
+    public List<CourseDTO> findAllCoursesForCompanies() {
+    }
+
+    public List<CourseDTO> findAllCoursesForStudentsInProgress() {
+    }
+
+    public List<CourseDTO> findAllCoursesForStudentsFinalizaded() {
+    }
+
+    public CourseDTO findCourseById(Long id) {
     }
 }
