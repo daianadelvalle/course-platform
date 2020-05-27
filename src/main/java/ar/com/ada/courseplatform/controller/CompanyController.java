@@ -42,7 +42,7 @@ public class CompanyController {
     @PutMapping({ "/{id}", "/{id}/" }) // localhost:8080/companies/1 y localhost:8080/companies/1/
     public ResponseEntity updateCompanyById(@Valid @RequestBody CompanyDTO companyDTO, @PathVariable Long id) {
         CompanyDTO companyUpdated = companyService.updateCompany(companyDTO, id);
-        return ResponseEntity.ok(actorUpdated);
+        return ResponseEntity.ok(companyUpdated);
     }
 
     @DeleteMapping({ "/{id}", "/{id}/" }) // localhost:8080/companies/1 y localhost:8080/companies/1/
