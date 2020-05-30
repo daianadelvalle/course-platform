@@ -61,19 +61,19 @@ public class CourseController {
         return ResponseEntity.ok(courseById);
     }
 
-//    @PostMapping({ "", "/" }) // localhost:8080/courses y localhost:8080/courses/ [POST]
-//    public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO directorDTO) throws URISyntaxException {
-//        CourseDTO courseSaved = courseServices.save(courseDTO);
-//        return ResponseEntity
-//                .created(new URI("/courses/" + courseSaved.getId()))
-//                .body(courseSaved);
-//    }
-//
-//    @PutMapping({ "/{id}", "/{id}/" }) // localhost:8080/courses/1 y localhost:8080/courses/1/ [PUT]
-//    public ResponseEntity updateCourseById(@Valid @RequestBody CourseDTO courseDTO, @PathVariable Long id) {
-//        CourseDTO courseUpdate = courseServices.updateCourse(courseDTO, id);
-//        return ResponseEntity.ok(courseUpdate);
-//    }
+    @PostMapping({ "", "/" }) // localhost:8080/courses y localhost:8080/courses/ [POST]
+    public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO courseDTO) throws URISyntaxException {
+        CourseDTO courseSaved = courseServices.save(courseDTO);
+        return ResponseEntity
+                .created(new URI("/courses/" + courseSaved.getId()))
+                .body(courseSaved);
+    }
+
+    @PutMapping({ "/{id}", "/{id}/" }) // localhost:8080/courses/1 y localhost:8080/courses/1/ [PUT]
+    public ResponseEntity updateDirectorById(@Valid @RequestBody CourseDTO courseDTO, @PathVariable Long id) {
+        CourseDTO courseUpdate = courseServices.updateCourse(courseDTO, id);
+        return ResponseEntity.ok(courseUpdate);
+    }
 
     @DeleteMapping({ "/{id}", "/{id}/" }) // localhost:8080/courses/1 y localhost:8080/courses/1/ [DELETE]
     public ResponseEntity deleteCourse(@PathVariable Long id) {

@@ -43,6 +43,10 @@ public class CourseServices implements Services<CourseDTO> {
 
     }
 
+    public CourseDTO updateCourse(CourseDTO courseDTO, Long id) { return null; }
+
+    public CourseDTO findCourseById(Long id) { return null; }
+
 //    public List<CourseDTO> findAllAvailables() {
 //        List<Course> courseEntityList = (List<Course>) courseRepository.findAll()
 //                .stream().filter(course -> course.getQuota() != course.getDirectAward() + course.getScolarshipAccountant());

@@ -41,10 +41,9 @@ public class ManagerDTO implements Serializable {
     private String email;
 
     //relationship
-    private Set<CompanyDTO> company;
+    private CompanyDTO companyDTO;
 
-    public ManagerDTO(Long id, String name, String lastName, String identificationType, Integer identification,
-                      String position, String email, Set<CompanyDTO> company) {
+    public ManagerDTO(Long id, @NotBlank(message = "name is required") String name, @NotBlank(message = "name is required") String lastName, @NotBlank(message = "name is required") String identificationType, @NotNull(message = "identification is requeride") @Positive(message = "only positive values") Integer identification, @NotBlank(message = "name is required") String position, @NotBlank(message = "name is required") @Email(message = "not format valid") String email, CompanyDTO companyDTO) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -52,17 +51,16 @@ public class ManagerDTO implements Serializable {
         this.identification = identification;
         this.position = position;
         this.email = email;
-        this.company = company;
+        this.companyDTO = companyDTO;
     }
 
-    public ManagerDTO(String name, String lastName, String identificationType,
-                      Integer identification, String position, String email, Set<CompanyDTO> company) {
+    public ManagerDTO(@NotBlank(message = "name is required") String name, @NotBlank(message = "name is required") String lastName, @NotBlank(message = "name is required") String identificationType, @NotNull(message = "identification is requeride") @Positive(message = "only positive values") Integer identification, @NotBlank(message = "name is required") String position, @NotBlank(message = "name is required") @Email(message = "not format valid") String email, CompanyDTO companyDTO) {
         this.name = name;
         this.lastName = lastName;
         this.identificationType = identificationType;
         this.identification = identification;
         this.position = position;
         this.email = email;
-        this.company = company;
+        this.companyDTO = companyDTO;
     }
 }

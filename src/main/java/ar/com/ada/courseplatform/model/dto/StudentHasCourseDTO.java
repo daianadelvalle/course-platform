@@ -35,4 +35,5 @@ public class StudentHasCourseDTO implements Serializable {
         this.finalized = finalized;
     }
 
+    public String getId() { return null; }
 }

@@ -7,36 +7,44 @@ import ar.com.ada.courseplatform.model.mapper.SocioEconomicStudyCycleMapper;
 import ar.com.ada.courseplatform.model.repository.SocioEconomicStudyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDTO> {
-//
-////    @Autowired
-////    @Qualifier("businessLogicExceptionComponent")
-////    private BusinessLogicExceptionComponent logicExceptionComponent;
-////
-////    @Autowired @Qualifier("socioEconomicStudyRepository")
-////    private SocioEconomicStudyRepository socioEconomicStudyRepository;
-////
-////    private SocioEconomicStudyCycleMapper managerCycleMapper = SocioEconomicStudyCycleMapper.MAPPER;
-////
-////    @Autowired @Qualifier("cycleAvoidingMappingContext")
-////    private CycleAvoidingMappingContext context;
-////
-////
-////    @Override
-////    public List<SocioEconomicStudyDTO> findAll() {
-////        return null;
-////    }
-////
-////    @Override
-////    public SocioEconomicStudyDTO save(SocioEconomicStudyDTO dto) {
-////        return null;
-////    }
-////
-////    @Override
-////    public void delete(Long id) {
-////
-////    }
-////}
+@Service("socioEconomicStudyServices")
+public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDTO> {
+
+    @Autowired
+    @Qualifier("businessLogicExceptionComponent")
+    private BusinessLogicExceptionComponent logicExceptionComponent;
+
+    @Autowired @Qualifier("socioEconomicStudyRepository")
+    private SocioEconomicStudyRepository socioEconomicStudyRepository;
+
+    private SocioEconomicStudyCycleMapper managerCycleMapper = SocioEconomicStudyCycleMapper.MAPPER;
+
+    @Autowired @Qualifier("cycleAvoidingMappingContext")
+    private CycleAvoidingMappingContext context;
+
+
+    @Override
+    public List<SocioEconomicStudyDTO> findAll() {
+        return null;
+    }
+
+    @Override
+    public SocioEconomicStudyDTO save(SocioEconomicStudyDTO dto) {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
+
+    public SocioEconomicStudyDTO findSocioEconomicStudyById(Long id) { return null;
+    }
+
+    public SocioEconomicStudyDTO updateSocioEconomicStudy(SocioEconomicStudyDTO socioEconomicStudyDTO, Long id) { return null;
+    }
+}

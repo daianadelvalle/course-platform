@@ -31,9 +31,9 @@ public class SocioEconomicStudyDTO  implements Serializable {
     private Integer numbersOfFamilyInCharge;
 
     //relationship
-    private Set<StudentDTO> student;
+    private StudentDTO studentDTO;
 
-    public SocioEconomicStudyDTO(Long id, Boolean study, Boolean work, Boolean incomes, Double amountOfIncomes, Boolean familyInCharge, Integer numbersOfFamilyInCharge, Set<StudentDTO> student) {
+    public SocioEconomicStudyDTO(Long id, Boolean study, Boolean work, Boolean incomes, Double amountOfIncomes, Boolean familyInCharge, @PositiveOrZero Integer numbersOfFamilyInCharge, StudentDTO studentDTO) {
         this.id = id;
         this.study = study;
         this.work = work;
@@ -41,7 +41,16 @@ public class SocioEconomicStudyDTO  implements Serializable {
         this.amountOfIncomes = amountOfIncomes;
         this.familyInCharge = familyInCharge;
         this.numbersOfFamilyInCharge = numbersOfFamilyInCharge;
-        this.student = student;
+        this.studentDTO = studentDTO;
     }
 
+    public SocioEconomicStudyDTO(Boolean study, Boolean work, Boolean incomes, Double amountOfIncomes, Boolean familyInCharge, @PositiveOrZero Integer numbersOfFamilyInCharge, StudentDTO studentDTO) {
+        this.study = study;
+        this.work = work;
+        this.incomes = incomes;
+        this.amountOfIncomes = amountOfIncomes;
+        this.familyInCharge = familyInCharge;
+        this.numbersOfFamilyInCharge = numbersOfFamilyInCharge;
+        this.studentDTO = studentDTO;
+    }
 }
