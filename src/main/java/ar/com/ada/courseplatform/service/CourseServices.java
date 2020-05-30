@@ -2,6 +2,8 @@ package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
 import ar.com.ada.courseplatform.model.dto.CourseDTO;
+import ar.com.ada.courseplatform.model.mapper.CourseCycleMapper;
+import ar.com.ada.courseplatform.model.mapper.CycleAvoidingMappingContext;
 import ar.com.ada.courseplatform.model.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,4 +40,8 @@ public class CourseServices implements Services<CourseDTO> {
     public void delete(Long id) {
 
     }
+
+    public CourseDTO updateCourse(CourseDTO courseDTO, Long id) { return null; }
+
+    public CourseDTO findCourseById(Long id) { return null; }
 }

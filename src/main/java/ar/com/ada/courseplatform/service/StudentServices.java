@@ -2,12 +2,16 @@ package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
 import ar.com.ada.courseplatform.model.dto.StudentDTO;
+import ar.com.ada.courseplatform.model.mapper.CycleAvoidingMappingContext;
+import ar.com.ada.courseplatform.model.mapper.StudentCycleMapper;
 import ar.com.ada.courseplatform.model.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("studentServices")
 public class StudentServices implements Services<StudentDTO> {
 
     @Autowired
@@ -35,5 +39,10 @@ public class StudentServices implements Services<StudentDTO> {
     @Override
     public void delete(Long id) {
 
+    }
+
+    public StudentDTO findStudentById(Long id) { return null; }
+
+    public StudentDTO updateStudent(StudentDTO studentDTO, Long id) { return null;
     }
 }

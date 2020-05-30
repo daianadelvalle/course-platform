@@ -2,6 +2,8 @@ package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
 import ar.com.ada.courseplatform.model.dto.CompanyDTO;
+import ar.com.ada.courseplatform.model.mapper.CompanyCycleMapper;
+import ar.com.ada.courseplatform.model.mapper.CycleAvoidingMappingContext;
 import ar.com.ada.courseplatform.model.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,4 +39,8 @@ public class CompanyServices implements Services<CompanyDTO> {
     public void delete(Long id) {
 
     }
+
+    public CompanyDTO findCompanyById(Long id) { return null;}
+
+    public CompanyDTO updateCompany(CompanyDTO companyDTO, Long id) { return null;}
 }

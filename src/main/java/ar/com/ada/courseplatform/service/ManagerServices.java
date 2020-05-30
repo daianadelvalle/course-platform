@@ -2,12 +2,16 @@ package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
 import ar.com.ada.courseplatform.model.dto.ManagerDTO;
+import ar.com.ada.courseplatform.model.mapper.CycleAvoidingMappingContext;
+import ar.com.ada.courseplatform.model.mapper.ManagerCycleMapper;
 import ar.com.ada.courseplatform.model.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("managerServices")
 public class ManagerServices implements Services<ManagerDTO> {
 
     @Autowired
@@ -35,5 +39,11 @@ public class ManagerServices implements Services<ManagerDTO> {
     @Override
     public void delete(Long id) {
 
+    }
+
+    public ManagerDTO findManagerById(Long id) { return null;
+    }
+
+    public ManagerDTO updateManager(ManagerDTO managerDTO, Long id) { return null;
     }
 }

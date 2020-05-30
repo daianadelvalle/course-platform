@@ -42,9 +42,9 @@ public class CompanyDTO implements Serializable {
     private Date foundationYear;
 
     //relationship
-    private Set<TypeOfCompanyDTO> typeOfCompany;
+    private TypeOfCompanyDTO typeOfCompanyDTO;
 
-    public CompanyDTO(Long id, String name, Integer cuil, String adress, Integer phone, String category, Date foundationYear, Set<TypeOfCompanyDTO> typeOfCompany) {
+    public CompanyDTO(Long id, @NotBlank(message = "name is required") String name, @NotNull(message = "cuil is required") @Positive(message = "only positive values") Integer cuil, @NotBlank(message = "adress is required") String adress, @NotNull(message = "phone is required") @Positive(message = "only positive values") Integer phone, @NotBlank(message = "category is required") String category, @NotNull(message = "foundation year is required") @PastOrPresent(message = "the foundation year must be past or present date") Date foundationYear, TypeOfCompanyDTO typeOfCompanyDTO) {
         this.id = id;
         this.name = name;
         this.cuil = cuil;
@@ -52,16 +52,16 @@ public class CompanyDTO implements Serializable {
         this.phone = phone;
         this.category = category;
         this.foundationYear = foundationYear;
-        this.typeOfCompany = typeOfCompany;
+        this.typeOfCompanyDTO = typeOfCompanyDTO;
     }
 
-    public CompanyDTO(String name, Integer cuil, String adress, Integer phone, String category, Date foundationYear, Set<TypeOfCompanyDTO> typeOfCompany) {
+    public CompanyDTO(@NotBlank(message = "name is required") String name, @NotNull(message = "cuil is required") @Positive(message = "only positive values") Integer cuil, @NotBlank(message = "adress is required") String adress, @NotNull(message = "phone is required") @Positive(message = "only positive values") Integer phone, @NotBlank(message = "category is required") String category, @NotNull(message = "foundation year is required") @PastOrPresent(message = "the foundation year must be past or present date") Date foundationYear, TypeOfCompanyDTO typeOfCompanyDTO) {
         this.name = name;
         this.cuil = cuil;
         this.adress = adress;
         this.phone = phone;
         this.category = category;
         this.foundationYear = foundationYear;
-        this.typeOfCompany = typeOfCompany;
+        this.typeOfCompanyDTO = typeOfCompanyDTO;
     }
 }

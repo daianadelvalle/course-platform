@@ -2,12 +2,16 @@ package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
 import ar.com.ada.courseplatform.model.dto.SocioEconomicStudyDTO;
+import ar.com.ada.courseplatform.model.mapper.CycleAvoidingMappingContext;
+import ar.com.ada.courseplatform.model.mapper.SocioEconomicStudyCycleMapper;
 import ar.com.ada.courseplatform.model.repository.SocioEconomicStudyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service("socioEconomicStudyServices")
 public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDTO> {
 
     @Autowired
@@ -36,5 +40,11 @@ public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDT
     @Override
     public void delete(Long id) {
 
+    }
+
+    public SocioEconomicStudyDTO findSocioEconomicStudyById(Long id) { return null;
+    }
+
+    public SocioEconomicStudyDTO updateSocioEconomicStudy(SocioEconomicStudyDTO socioEconomicStudyDTO, Long id) { return null;
     }
 }

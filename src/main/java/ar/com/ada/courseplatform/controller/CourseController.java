@@ -32,7 +32,7 @@ public class CourseController {
     }
 
     @PostMapping({ "", "/" }) // localhost:8080/courses y localhost:8080/courses/ [POST]
-    public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO directorDTO) throws URISyntaxException {
+    public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO courseDTO) throws URISyntaxException {
         CourseDTO courseSaved = courseServices.save(courseDTO);
         return ResponseEntity
                 .created(new URI("/courses/" + courseSaved.getId()))

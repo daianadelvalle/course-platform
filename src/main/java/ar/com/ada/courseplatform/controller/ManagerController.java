@@ -27,7 +27,7 @@ public class ManagerController {
 
     @GetMapping({ "/{id}", "/{id}/" }) // localhost:8080/managers/1 y localhost:8080/managers/1/ [GET]
     public ResponseEntity getManagerById(@PathVariable Long id) {
-        ManagerDTO managerById = studentServices.findManagerById(id);
+        ManagerDTO managerById = managerServices.findManagerById(id);
         return ResponseEntity.ok(managerById);
     }
 
