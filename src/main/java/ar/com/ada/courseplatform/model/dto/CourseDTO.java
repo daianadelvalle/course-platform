@@ -1,6 +1,11 @@
 package ar.com.ada.courseplatform.model.dto;
 
+import ar.com.ada.courseplatform.model.entity.StudentHasCourse;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +19,9 @@ import java.util.Set;
 @Getter @Setter
 @NoArgsConstructor
 @JsonPropertyOrder({"id", "name", "description", "modality", "cost", "workload", "category",
-        "quota", "scolarship", "directAward", "scolarshipAccountant", "",})
+        "quota", "scolarship", "directAward", "scolarshipAccountant", "student_has_courses"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CourseDTO implements Serializable {
 
     //attr
@@ -61,11 +68,14 @@ public class CourseDTO implements Serializable {
     private Integer scolarshipAccountant;
 
     //relationship
-    private Set<CompanyDTO> company;
+    private CompanyDTO company;
+
+    @JsonIgnoreProperties({ "book", "publisher"})
+    private Set<StudentHasCourse> studentHasCourses;
 
     public CourseDTO(Long id, String name, String description, String modality, Double cost,
                      Integer workload, String category, Integer quota, Integer scolarship,
-                     Integer directAward, Integer scolarshipAccountant, Set<CompanyDTO> company) {
+                     Integer directAward, Integer scolarshipAccountant, CompanyDTO company) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -82,7 +92,7 @@ public class CourseDTO implements Serializable {
 
     public CourseDTO(String name, String description, String modality, Double cost,
                      Integer workload, String category, Integer quota, Integer scolarship,
-                     Integer directAward, Integer scolarshipAccountant, Set<CompanyDTO> company) {
+                     Integer directAward, Integer scolarshipAccountant, CompanyDTO company) {
         this.name = name;
         this.description = description;
         this.modality = modality;

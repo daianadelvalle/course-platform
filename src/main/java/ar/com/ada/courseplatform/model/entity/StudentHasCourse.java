@@ -13,14 +13,16 @@ import java.util.Objects;
 @Entity(name = "Student_has_Course")
 public class StudentHasCourse implements Serializable {
 
-    @Id
+    @EmbeddedId
+    private StudentHasCourse id;
+
+
     @ManyToOne
-    @JoinColumn
+    @MapsId("studentId")
     private Student student;
 
-    @Id
     @ManyToOne
-    @JoinColumn
+    @MapsId("courseId")
     private Course course;
 
     //tipo de solicitud del curso: directa o beca
