@@ -5,12 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "Socio_economic_study")
-public class SocioEconomicStudy {
+public class SocioEconomicStudy implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,20 +36,8 @@ public class SocioEconomicStudy {
     @Column(nullable = true, length = 30)
     private Integer numbersOfFamilyInCharge;
 
-    @JoinColumn(name = "student_id", unique =true, nullable = false)
+    @JoinColumn(name = "student_id", unique = true, nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     private Student student;
 
-    public SocioEconomicStudy(Boolean study, Boolean work, Boolean incomes, Double amountOfIncomes, Boolean familyInCharge, Integer numbersOfFamilyInCharge) {
-        this.study = study;
-        this.work = work;
-        this.incomes = incomes;
-        this.amountOfIncomes = amountOfIncomes;
-        this.familyInCharge = familyInCharge;
-        this.numbersOfFamilyInCharge = numbersOfFamilyInCharge;
-    }
-
-    public SocioEconomicStudy(Long id) {
-        this.id = id;
-    }
 }
