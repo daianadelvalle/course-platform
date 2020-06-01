@@ -70,43 +70,7 @@ public class CourseDTO implements Serializable {
     //relationship
     private CompanyDTO company;
 
-    @JsonIgnoreProperties({ "book", "publisher"})
+    @JsonIgnoreProperties({"book", "publisher"})
     private Set<StudentHasCourse> studentHasCourses;
 
-    public CourseDTO(Long id, String name, String description, String modality, Double cost,
-                     Integer workload, String category, Integer quota, Integer scolarship,
-                     Integer directAward, Integer scolarshipAccountant, CompanyDTO company) {
-
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.modality = modality;
-        this.cost = cost;
-        this.workload = workload;
-        this.category = category;
-        this.quota = quota;
-        this.scolarship = scolarship;
-        this.directAward = directAward;
-        this.scolarshipAccountant = scolarshipAccountant;
-        this.company = company;
-    }
-
-    public CourseDTO(@NotBlank(message = "name is required") String name, @NotBlank(message = "description is required") String description, @NotBlank(message = "modality is required") String modality, @NotNull(message = "cost is required") @Positive(message = "only positive values") Double cost, @NotNull(message = "workload is required") @Positive(message = "only positive values") Integer workload, @NotBlank(message = "category is required") String category, @NotNull(message = "quota is required") @Positive(message = "only positive values") Integer quota, @NotNull(message = "scolarship is required") @Positive(message = "only positive values") Integer scolarship, @NotNull(message = "direct Award is required") Integer directAward, @NotNull(message = "scolarship Accountant is required") Integer scolarshipAccountant, CompanyDTO company) {
-
-    public CourseDTO(String name, String description, String modality, Double cost,
-                     Integer workload, String category, Integer quota, Integer scolarship,
-                     Integer directAward, Integer scolarshipAccountant, CompanyDTO company) {
-
-        this.name = name;
-        this.description = description;
-        this.modality = modality;
-        this.cost = cost;
-        this.workload = workload;
-        this.category = category;
-        this.quota = quota;
-        this.scolarship = scolarship;
-        this.directAward = directAward;
-        this.scolarshipAccountant = scolarshipAccountant;
-        this.company = company;
-    }
 }
