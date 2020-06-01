@@ -5,13 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "Course")
-public class Course {
+public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,20 +64,4 @@ public class Course {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
-    public Course(String name, String description, String modality, Double cost, Integer workload, String category, Integer quota, Integer scolarship, Integer directAward, Integer scolarshipAccountant) {
-        this.name = name;
-        this.description = description;
-        this.modality = modality;
-        this.cost = cost;
-        this.workload = workload;
-        this.category = category;
-        this.quota = quota;
-        this.scolarship = scolarship;
-        this.directAward = directAward;
-        this.scolarshipAccountant = scolarshipAccountant;
-    }
-
-    public Course(Long id) {
-        this.id = id;
-    }
 }

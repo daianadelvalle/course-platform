@@ -5,12 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "type_of_company")
-public class TypeOfCompany {
+public class TypeOfCompany implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +24,5 @@ public class TypeOfCompany {
     @OneToMany(mappedBy = "typeOfCompany", cascade = CascadeType.ALL)
     private Set<Company> companies;
 
-    public TypeOfCompany(String category) {
-        this.category = category;
-    }
 
-    public TypeOfCompany(Long id) {
-        this.id = id;
-    }
 }

@@ -5,11 +5,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "Manager")
-public class Manager {
+public class Manager implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,20 +35,9 @@ public class Manager {
     @Column(nullable = false, length = 200)
     private String email;
 
-    @JoinColumn(name = "company_id", unique =true, nullable = false)
+    @JoinColumn(name = "company_id", unique = true, nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     private Company company;
 
-    public Manager(String name, String lastName, String identificationType, Integer identification, String position, String email) {
-        this.name = name;
-        this.lastName = lastName;
-        this.identificationType = identificationType;
-        this.identification = identification;
-        this.position = position;
-        this.email = email;
-    }
 
-    public Manager(Long id) {
-        this.id = id;
-    }
 }
