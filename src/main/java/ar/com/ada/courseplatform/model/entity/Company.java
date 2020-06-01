@@ -5,15 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "Company")
-public class Company {
+public class Company implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Company {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 15 )
+    @Column(nullable = false, length = 15)
     private Integer cuil;
 
     @Column(nullable = false, columnDefinition = "LONGTEXT")
@@ -39,24 +39,10 @@ public class Company {
 
     //relationship
     @OneToMany(mappedBy = "company")
-    private List<Course> courses = new ArrayList<>();
+    private Set<Course> courses;
 
     @ManyToOne
     @JoinColumn(name = "type_of_company_id", nullable = false)
     private TypeOfCompany typeOfCompany;
 
-
-
-    public Company(String name, Integer cuil, String adress, Integer phone, String category, Date foundationYear) {
-        this.name = name;
-        this.cuil = cuil;
-        this.adress = adress;
-        this.phone = phone;
-        this.category = category;
-        this.foundationYear = foundationYear;
-    }
-
-    public Company(Long id) {
-        this.id = id;
-    }
 }

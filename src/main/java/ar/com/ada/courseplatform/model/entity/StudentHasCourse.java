@@ -8,13 +8,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "Student_has_Course")
 public class StudentHasCourse implements Serializable {
 
     @EmbeddedId
-    private StudentHasCourse id;
+    private StudentHasCourseId id;
 
 
     @ManyToOne
@@ -37,11 +38,6 @@ public class StudentHasCourse implements Serializable {
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean finalized;
 
-    public StudentHasCourse(String typeOfRequest, Boolean approvalStatus, Boolean finalized) {
-        this.typeOfRequest = typeOfRequest;
-        this.approvalStatus = approvalStatus;
-        this.finalized = finalized;
-    }
 
     @Override
     public boolean equals(Object o) {
