@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Year;
 import java.util.Set;
 
 @Getter
@@ -22,27 +22,27 @@ public class Company implements Serializable {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 15)
+    @Column(nullable = false, length = 20)
     private Integer cuil;
 
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String adress;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 30)
     private Integer phone;
 
     @Column(nullable = false, length = 80)
     private String category;
 
-    @Column(name = "foundation_year", nullable = false, columnDefinition = "YEAR")
-    private Date foundationYear;
+    @Column(name = "foundation_year", nullable = false, length = 4)
+    private Year foundationYear;
 
     //relationship
     @OneToMany(mappedBy = "company")
     private Set<Course> courses;
 
     @ManyToOne
-    @JoinColumn(name = "type_of_company_id", nullable = false)
+    @JoinColumn(name = "type_of_company_id")
     private TypeOfCompany typeOfCompany;
 
 }

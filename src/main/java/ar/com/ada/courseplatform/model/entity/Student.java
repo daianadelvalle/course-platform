@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class Student implements Serializable {
     private String lastName;
 
     @Column(nullable = false, columnDefinition = "DATE")
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @Column(nullable = false, length = 50)
     private String gender;

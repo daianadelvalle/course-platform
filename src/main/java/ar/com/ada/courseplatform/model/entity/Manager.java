@@ -20,7 +20,7 @@ public class Manager implements Serializable {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
 
     @Column(name = "identification_type", nullable = false, length = 50)
@@ -35,7 +35,7 @@ public class Manager implements Serializable {
     @Column(nullable = false, length = 200)
     private String email;
 
-    @JoinColumn(name = "company_id", unique = true, nullable = false)
+    @JoinColumn(name = "company_id", unique = true)
     @OneToOne(cascade = CascadeType.ALL)
     private Company company;
 
