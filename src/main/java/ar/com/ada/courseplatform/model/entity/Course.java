@@ -48,11 +48,11 @@ public class Course implements Serializable {
 
 
     //adjudicación directa inicializado a 0
-    @Column(name = "direct_award", nullable = false, length = 40, precision = 0)
+    @Column(name = "direct_award", nullable = false, length = 40)
     private Integer directAward;
 
     //contador de becas
-    @Column(name = "scolarship_accountant", nullable = false, length = 40, precision = 0)
+    @Column(name = "scolarship_accountant", nullable = false, length = 40)
     private Integer scolarshipAccountant;
 
     //relationship
@@ -61,7 +61,7 @@ public class Course implements Serializable {
     private Set<StudentHasCourse> studentHasCourses = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "company_id")
     private Company company;
 
 }
