@@ -33,10 +33,10 @@ public class SocioEconomicStudy implements Serializable {
     @Column(name = "family_in_charge", nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean familyInCharge;
 
-    @Column(nullable = true, length = 30)
+    @Column(name = "numbers_of_family_in_charge", length = 30)
     private Integer numbersOfFamilyInCharge;
 
-    @JoinColumn(name = "student_id", unique = true, nullable = false)
+    @JoinColumn(name = "student_id")
     @OneToOne(cascade = CascadeType.ALL)
     private Student student;
 
