@@ -11,26 +11,46 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("managerServices")
-public class ManagerServices implements Services<ManagerDTO>{
+public class ManagerServices implements Services<ManagerDTO> {
 
     @Autowired
     @Qualifier("businessLogicExceptionComponent")
     private BusinessLogicExceptionComponent logicExceptionComponent;
 
-    @Autowired @Qualifier("managerRepository")
+    @Autowired
+    @Qualifier("managerRepository")
     private ManagerRepository managerRepository;
 
     private final ManagerMapper managerMapper = ManagerMapper.MAPPER;
 
-    @Autowired @Qualifier("cycleAvoidingMappingContext")
+    @Autowired
+    @Qualifier("cycleAvoidingMappingContext")
     private CycleAvoidingMappingContext context;
 
     @Override
     public List<ManagerDTO> findAll() {
-        return null;
+        List<Manager> all = managerRepository.findAll();
+        List<ManagerDTO> managerDTOList = managerMapper.toDto(all, context);
+        return managerDTOList;
     }
+
+    public ManagerDTO findManagerById(Long id) {
+        Optional<Manager> byIdOptional = managerRepository.findById(id);
+        ManagerDTO managerDTO = null;
+
+        if (byIdOptional.isPresent()) {
+            Manager manager = byIdOptional.get();
+            managerDTO = managerMapper.toDto(manager, context);
+        } else {
+            logicExceptionComponent.throwExceptionEntityNotFound("Manager", id);
+        }
+
+        return managerDTO;
+    }
+
 
     @Override
     public ManagerDTO save(ManagerDTO dto) {
@@ -45,9 +65,7 @@ public class ManagerServices implements Services<ManagerDTO>{
 
     }
 
-    public ManagerDTO findManagerById(Long id) { return null;
-    }
-
-    public ManagerDTO updateManager(ManagerDTO managerDTO, Long id) { return null;
+    public ManagerDTO updateManager(ManagerDTO managerDTO, Long id) {
+        return null;
     }
 }

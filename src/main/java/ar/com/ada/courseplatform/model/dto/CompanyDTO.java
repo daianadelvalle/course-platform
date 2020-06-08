@@ -1,4 +1,5 @@
 package ar.com.ada.courseplatform.model.dto;
+import ar.com.ada.courseplatform.model.entity.Manager;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -45,5 +46,7 @@ public class CompanyDTO implements Serializable {
 
     //relationship
     private TypeOfCompanyDTO typeOfCompanyDTO;
+
+    private ManagerDTO managerDTO;
 
 }

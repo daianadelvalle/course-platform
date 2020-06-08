@@ -45,4 +45,12 @@ public class Company implements Serializable {
     @JoinColumn(name = "type_of_company_id")
     private TypeOfCompany typeOfCompany;
 
+    @JoinColumn(name = "manager_id", unique = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    private Manager manager;
+
+    public void addManager(Manager manager) {
+        this.manager = manager;
+    }
+
 }
