@@ -26,8 +26,7 @@ public class CompanyDTO implements Serializable {
     private String name;
 
     @NotNull(message = "cuil is required")
-    @Positive(message = "only positive values")
-    private Integer cuil;
+    private Long cuil;
 
     @NotBlank(message = "adress is required")
     private String adress;
@@ -45,5 +44,8 @@ public class CompanyDTO implements Serializable {
 
     //relationship
     private TypeOfCompanyDTO typeOfCompanyDTO;
+
+    private ManagerDTO managerDTO;
+
 
 }
