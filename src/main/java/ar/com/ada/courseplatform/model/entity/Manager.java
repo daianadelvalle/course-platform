@@ -39,5 +39,9 @@ public class Manager implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Company company;
 
+    public void addCompany(Company company) {
+        this.company = company;
+    }
+
 
 }

@@ -1,5 +1,4 @@
 package ar.com.ada.courseplatform.model.dto;
-import ar.com.ada.courseplatform.model.entity.Manager;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -27,8 +26,7 @@ public class CompanyDTO implements Serializable {
     private String name;
 
     @NotNull(message = "cuil is required")
-    @Positive(message = "only positive values")
-    private Integer cuil;
+    private Long cuil;
 
     @NotBlank(message = "adress is required")
     private String adress;
@@ -48,5 +46,6 @@ public class CompanyDTO implements Serializable {
     private TypeOfCompanyDTO typeOfCompanyDTO;
 
     private ManagerDTO managerDTO;
+
 
 }

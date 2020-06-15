@@ -22,13 +22,13 @@ public class Company implements Serializable {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 20)
-    private Integer cuil;
+    @Column(nullable = false)
+    private Long cuil;
 
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String adress;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false)
     private Integer phone;
 
     @Column(nullable = false, length = 80)
