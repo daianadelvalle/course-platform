@@ -1,4 +1,4 @@
-package ar.com.ada.courseplatform.service.security;
+package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
 import ar.com.ada.courseplatform.exception.ApiEntityError;
@@ -37,7 +37,7 @@ public class CompanyServices  {
 
     private final CompanyMapper companyMapper = CompanyMapper.MAPPER;
     private final ManagerMapper managerMapper = ManagerMapper.MAPPER;
-
+    
     @Autowired
     @Qualifier("cycleAvoidingMappingContext")
     private CycleAvoidingMappingContext context;
@@ -51,16 +51,10 @@ public class CompanyServices  {
     }
 
     public CompanyDTO findCompanyById(Long id) {
-        Optional<Company> byIdOptional = companyRepository.findById(id);
-        CompanyDTO companyDTO = null;
-
-        if (byIdOptional.isPresent()) {
-            Company company = byIdOptional.get();
-            companyDTO = companyMapper.toDto(company, context);
-        } else {
-            logicExceptionComponent.throwExceptionEntityNotFound("Company", id);
-        }
-
+        Company company = companyRepository
+                .findById(id)
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Company", id));
+        CompanyDTO companyDTO  = companyMapper.toDto(company, context);
         return companyDTO;
     }
 
@@ -92,21 +86,21 @@ public class CompanyServices  {
     }
 
     public ManagerDTO findManagerById(Long id) {
-        Optional<Manager> byIdOptional = managerRepository.findById(id);
-        ManagerDTO managerDTO = null;
-
-        if (byIdOptional.isPresent()) {
-            Manager manager = byIdOptional.get();
-            managerDTO = managerMapper.toDto(manager, context);
-        } else {
-            logicExceptionComponent.throwExceptionEntityNotFound("Manager", id);
-        }
+        Manager manager = managerRepository
+                .findById(id)
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Manager", id ));
+        ManagerDTO managerDTO = managerMapper.toDto(manager, context);
 
         return managerDTO;
     }
 
     public ManagerDTO save(ManagerDTO dto) {
+        Long companyId = dto.getCompanyId();
+        Company company = companyRepository
+                .findById(companyId)
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Company", companyId));
         Manager managerToSave = managerMapper.toEntity(dto, context);
+        managerToSave.setCompany(company);
         Manager managerSaved = managerRepository.save(managerToSave);
         ManagerDTO managerDTOtoSaved = managerMapper.toDto(managerSaved, context);
         return managerDTOtoSaved;

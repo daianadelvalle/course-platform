@@ -42,6 +42,9 @@ public class CompanyDTO implements Serializable {
     @Past(message = "the foundation year must be past or present date")
     private Year foundationYear;
 
+    @NotNull(message = "comoany_id is required")
+    private Long companyId;
+
     //relationship
     private TypeOfCompanyDTO typeOfCompanyDTO;
 

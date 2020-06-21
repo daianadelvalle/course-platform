@@ -36,8 +36,10 @@ public class SocioEconomicStudy implements Serializable {
     @Column(name = "numbers_of_family_in_charge", length = 30)
     private Integer numbersOfFamilyInCharge;
 
-    @JoinColumn(name = "student_id")
+
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
+    public void addStudent(Student student) { this.student = student; }
 }

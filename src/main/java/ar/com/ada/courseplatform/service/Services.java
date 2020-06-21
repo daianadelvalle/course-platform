@@ -1,4 +1,4 @@
-package ar.com.ada.courseplatform.service.security;
+package ar.com.ada.courseplatform.service;
 
 import java.util.List;
 

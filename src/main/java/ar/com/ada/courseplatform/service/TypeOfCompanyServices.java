@@ -1,4 +1,4 @@
-package ar.com.ada.courseplatform.service.security;
+package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
 import ar.com.ada.courseplatform.model.dto.TypeOfCompanyDTO;

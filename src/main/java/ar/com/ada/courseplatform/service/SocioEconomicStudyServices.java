@@ -1,17 +1,22 @@
 package ar.com.ada.courseplatform.service;
 
 import ar.com.ada.courseplatform.component.BusinessLogicExceptionComponent;
+import ar.com.ada.courseplatform.exception.ApiEntityError;
+import ar.com.ada.courseplatform.exception.BusinessLogicException;
 import ar.com.ada.courseplatform.model.dto.SocioEconomicStudyDTO;
 import ar.com.ada.courseplatform.model.entity.SocioEconomicStudy;
+import ar.com.ada.courseplatform.model.entity.Student;
 import ar.com.ada.courseplatform.model.mapper.CycleAvoidingMappingContext;
 import ar.com.ada.courseplatform.model.mapper.SocioEconomicStudyMapper;
 import ar.com.ada.courseplatform.model.repository.SocioEconomicStudyRepository;
-import ar.com.ada.courseplatform.service.security.Services;
+import ar.com.ada.courseplatform.model.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("socioEconomicStudyServices")
 public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDTO> {
@@ -23,6 +28,10 @@ public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDT
     @Autowired
     @Qualifier("socioEconomicStudyRepository")
     private SocioEconomicStudyRepository socioEconomicStudyRepository;
+
+    @Autowired
+    @Qualifier("studentRepository")
+    private StudentRepository studentRepository;
 
     private final SocioEconomicStudyMapper socioEconomicStudyMapper = SocioEconomicStudyMapper.MAPPER;
 
@@ -48,5 +57,40 @@ public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDT
     @Override
     public void delete(Long id) {
 
+    }
+
+    public SocioEconomicStudyDTO addStudentToStudy(Long student_id, Long socio_economic_study_id) {
+        Optional<Student> studentByIdOptional = studentRepository.findById(student_id);
+        Optional<SocioEconomicStudy> studyByIdOptional = socioEconomicStudyRepository.findById(socio_economic_study_id);
+        SocioEconomicStudyDTO studyDTOWithNewStudent = null;
+
+        if (!studentByIdOptional.isPresent())
+            logicExceptionComponent.throwExceptionEntityNotFound("Student", student_id);
+
+        if (!studyByIdOptional.isPresent())
+            logicExceptionComponent.throwExceptionEntityNotFound("SocioEconomicStudy", socio_economic_study_id);
+
+        SocioEconomicStudy socioEconomicStudy = studyByIdOptional.get();
+        Student studentToAdd = studentByIdOptional.get();
+
+        boolean hasStudentInStudy = socioEconomicStudy.getStudent() == null;
+
+        if (hasStudentInStudy) {
+            socioEconomicStudy.addStudent(studentToAdd);
+            SocioEconomicStudy studyWithNewStudent = socioEconomicStudyRepository.save(socioEconomicStudy);
+            studyDTOWithNewStudent = socioEconomicStudyMapper.toDto(studyWithNewStudent, context);
+        } else {
+            ApiEntityError apiEntityError = new ApiEntityError(
+                    "Student",
+                    "AlreadyExist",
+                    "This study already has a student"
+            );
+            throw new BusinessLogicException(
+                    "Socio-economic-study already exist in the student",
+                    HttpStatus.BAD_REQUEST,
+                    apiEntityError
+            );
+        }
+        return studyDTOWithNewStudent;
     }
 }

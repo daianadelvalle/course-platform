@@ -43,6 +43,9 @@ public class ManagerDTO {
     @Email(message = "not format valid")
     private String email;
 
+    @NotNull(message = "company_id is required")
+    private Long companyId;
+
     //relationship
     private CompanyDTO companyDTO;
 }

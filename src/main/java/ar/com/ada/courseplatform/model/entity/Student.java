@@ -39,4 +39,6 @@ public class Student implements Serializable {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<StudentHasCourse> studentHasCourses;
 
+    @OneToOne(mappedBy = "student")
+    private SocioEconomicStudy socioEconomicStudy;
 }

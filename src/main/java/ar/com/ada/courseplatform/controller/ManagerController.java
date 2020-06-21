@@ -11,10 +11,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-//@RestController
-//@RequestMapping("/managers")
-//public class ManagerController {
-//
+@RestController
+@RequestMapping("/managers")
+public class ManagerController {
+
 //    @Autowired
 //    @Qualifier("managerServices")
 //    private ManagerServices managerServices;
@@ -38,4 +38,4 @@ import java.util.List;
 //                .created(new URI("/managers/" + managerDTO.getId()))
 //                .body(managerSaved);
 //    }
-//}
+}

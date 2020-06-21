@@ -5,10 +5,7 @@ import ar.com.ada.courseplatform.service.SocioEconomicStudyServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -28,5 +25,12 @@ public class SocioEconomicStudyController {
         return ResponseEntity
                 .created(new URI("/socio-economic-studies/" + socioEconomicStudySaved.getId()))
                 .body(socioEconomicStudySaved);
+    }
+
+    // localhost:8080/companies/1/managers/1 y localhost:8080/companies/1/managers/1/ [PUT]
+    @PutMapping({"/{socio_economic_study_id}/students/{student_id}", "/{socio_economic_study_id}/students/{student_id}"})
+    public ResponseEntity addStudentToStudy(@PathVariable Long socio_economic_study_id, @PathVariable Long student_id) {
+        SocioEconomicStudyDTO studyDTOWithNewStudent = socioEconomicStudyServices.addStudentToStudy(socio_economic_study_id, student_id);
+        return ResponseEntity.ok(studyDTOWithNewStudent);
     }
 }

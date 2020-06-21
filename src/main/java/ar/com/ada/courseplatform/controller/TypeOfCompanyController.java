@@ -1,7 +1,7 @@
 package ar.com.ada.courseplatform.controller;
 
 import ar.com.ada.courseplatform.model.dto.TypeOfCompanyDTO;
-import ar.com.ada.courseplatform.service.security.TypeOfCompanyServices;
+import ar.com.ada.courseplatform.service.TypeOfCompanyServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
