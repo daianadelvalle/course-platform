@@ -7,11 +7,14 @@ import ar.com.ada.courseplatform.model.dto.CompanyDTO;
 import ar.com.ada.courseplatform.model.dto.ManagerDTO;
 import ar.com.ada.courseplatform.model.entity.Company;
 import ar.com.ada.courseplatform.model.entity.Manager;
+import ar.com.ada.courseplatform.model.entity.TypeOfCompany;
 import ar.com.ada.courseplatform.model.mapper.CompanyMapper;
 import ar.com.ada.courseplatform.model.mapper.CycleAvoidingMappingContext;
 import ar.com.ada.courseplatform.model.mapper.ManagerMapper;
+import ar.com.ada.courseplatform.model.mapper.TypeOfCompanyMapper;
 import ar.com.ada.courseplatform.model.repository.CompanyRepository;
 import ar.com.ada.courseplatform.model.repository.ManagerRepository;
+import ar.com.ada.courseplatform.model.repository.TypeOfCompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -35,9 +38,14 @@ public class CompanyServices  {
     @Qualifier("managerRepository")
     private ManagerRepository managerRepository;
 
+    @Autowired
+    @Qualifier("typeOfCompanyRepository")
+    private TypeOfCompanyRepository typeOfCompanyRepository;
+
     private final CompanyMapper companyMapper = CompanyMapper.MAPPER;
     private final ManagerMapper managerMapper = ManagerMapper.MAPPER;
-    
+    private final TypeOfCompanyMapper typeOfCompanyMapper = TypeOfCompanyMapper.MAPPER;
+
     @Autowired
     @Qualifier("cycleAvoidingMappingContext")
     private CycleAvoidingMappingContext context;
@@ -60,7 +68,12 @@ public class CompanyServices  {
 
 
     public CompanyDTO save(CompanyDTO dto) {
+        Long typeOfCompanyId = dto.getTypeOfCompanyId();
+        TypeOfCompany typeOfCompany = typeOfCompanyRepository
+                .findById(typeOfCompanyId)
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("TypeOfCompany", typeOfCompanyId));
         Company companyToSave = companyMapper.toEntity(dto, context);
+        companyToSave.setTypeOfCompany(typeOfCompany);
         Company companySaved = companyRepository.save(companyToSave);
         CompanyDTO companyDTOtoSaved = companyMapper.toDto(companySaved, context);
         return companyDTOtoSaved;

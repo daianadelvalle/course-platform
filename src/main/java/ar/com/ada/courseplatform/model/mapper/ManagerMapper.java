@@ -14,5 +14,5 @@ public interface ManagerMapper extends CycleDataMapper<ManagerDTO, Manager> {
 
     @InheritInverseConfiguration
     @Mapping(target = "companyId", ignore = true)
-    ManagerDTO toDTO(Manager entity, @Context CycleAvoidingMappingContext context);
+    ManagerDTO toDto(Manager entity, @Context CycleAvoidingMappingContext context);
 }
