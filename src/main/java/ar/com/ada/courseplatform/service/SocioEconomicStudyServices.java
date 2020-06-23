@@ -29,6 +29,7 @@ public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDT
     @Qualifier("socioEconomicStudyRepository")
     private SocioEconomicStudyRepository socioEconomicStudyRepository;
 
+
     @Autowired
     @Qualifier("studentRepository")
     private StudentRepository studentRepository;
@@ -47,7 +48,12 @@ public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDT
 
     @Override
     public SocioEconomicStudyDTO save(SocioEconomicStudyDTO dto) {
+        Long studentId = dto.getStudentId();
+        Student student = studentRepository
+                .findById(studentId)
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Student", studentId));
         SocioEconomicStudy socioEconomicStudyToSave = socioEconomicStudyMapper.toEntity(dto, context);
+        socioEconomicStudyToSave.setStudent(student);
         SocioEconomicStudy socioEconomicStudySaved = socioEconomicStudyRepository.save(socioEconomicStudyToSave);
         SocioEconomicStudyDTO socioEconomicStudyDTOtoSaved = socioEconomicStudyMapper.toDto(socioEconomicStudySaved, context);
 
