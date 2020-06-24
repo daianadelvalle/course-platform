@@ -35,6 +35,7 @@ public class Manager implements Serializable {
     @Column(nullable = false, length = 200)
     private String email;
 
+
     @JoinColumn(name = "company_id", unique = true)
     @OneToOne(cascade = CascadeType.ALL)
     private Company company;

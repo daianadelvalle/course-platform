@@ -20,7 +20,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @JsonPropertyOrder({"id", "name", "description", "modality", "cost", "workload", "category",
-        "quota", "scolarship", "direct_award", "scolarship_accountant", "student_has_courses"})
+        "quota", "scolarship", "direct_award", "scolarship_accountant", "available", "student_has_courses"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CourseDTO implements Serializable {
@@ -70,6 +70,8 @@ public class CourseDTO implements Serializable {
 
     @NotNull(message = "company_id is required")
     private Long companyId;
+
+    private Boolean available;
 
     //relationship
     private CompanyDTO company;

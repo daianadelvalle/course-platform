@@ -57,6 +57,10 @@ public class CourseServices implements Services<CourseDTO> {
                 .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Company", companyId));
         Course courseToSaved = courseMapper.toEntity(dto, context);
         courseToSaved.setCompany(company);
+
+        Integer directAward = courseToSaved.getQuota() -courseToSaved.getScolarship();
+        courseToSaved.setDirectAward(directAward);
+
         Course courseSaved = courseRepository.save(courseToSaved);
         CourseDTO courseDTOtoSaved = courseMapper.toDto(courseSaved, context);
 

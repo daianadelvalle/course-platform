@@ -56,6 +56,9 @@ public class Course implements Serializable {
     @Column(name = "scolarship_accountant", nullable = false, length = 40)
     private Integer scolarshipAccountant;
 
+    @Column(name = "available", columnDefinition = "TINYINT(1)")
+    private Boolean available;
+
     //relationship
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
