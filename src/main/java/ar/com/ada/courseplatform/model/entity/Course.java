@@ -53,7 +53,7 @@ public class Course implements Serializable {
     private Integer directAward;
 
     //contador de becas
-    @Column(name = "scolarship_accountant", nullable = false, length = 40)
+    @Column(name = "scolarship_accountant", nullable = false)
     private Integer scolarshipAccountant;
 
     @Column(name = "available", columnDefinition = "TINYINT(1)")

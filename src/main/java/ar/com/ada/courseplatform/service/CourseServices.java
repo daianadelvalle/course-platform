@@ -61,6 +61,9 @@ public class CourseServices implements Services<CourseDTO> {
         Integer directAward = courseToSaved.getQuota() -courseToSaved.getScolarship();
         courseToSaved.setDirectAward(directAward);
 
+        Integer scolarshipAccountant = courseToSaved.getScolarship();
+        courseToSaved.setScolarshipAccountant(scolarshipAccountant);
+
         Course courseSaved = courseRepository.save(courseToSaved);
         CourseDTO courseDTOtoSaved = courseMapper.toDto(courseSaved, context);
 
