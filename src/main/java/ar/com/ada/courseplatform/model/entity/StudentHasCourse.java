@@ -27,15 +27,15 @@ public class StudentHasCourse implements Serializable {
     private Course course;
 
     //tipo de solicitud del curso: directa o beca
-    @Column(name = "type_of_request", nullable = false, length = 50)
-    private String typeOfRequest;
+    @Column(name = "direct_award", nullable = false, columnDefinition = "TINYINT(1)")
+    private Boolean directAward;
 
     //aprobada o desaprovada la solicitud de cupo
-    @Column(name = "approval_status", nullable = false, columnDefinition = "TINYINT(1)")
+    @Column(name = "approval_status", columnDefinition = "TINYINT(1)")
     private Boolean approvalStatus;
 
     //finalizado o no finalizado el curso
-    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    @Column( columnDefinition = "TINYINT(1)")
     private Boolean finalized;
 
 
@@ -46,13 +46,13 @@ public class StudentHasCourse implements Serializable {
         StudentHasCourse that = (StudentHasCourse) o;
         return Objects.equals(student, that.student) &&
                 Objects.equals(course, that.course) &&
-                Objects.equals(typeOfRequest, that.typeOfRequest) &&
+                Objects.equals(directAward, that.directAward) &&
                 Objects.equals(approvalStatus, that.approvalStatus) &&
                 Objects.equals(finalized, that.finalized);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(student, course, typeOfRequest, approvalStatus, finalized);
+        return Objects.hash(student, course, directAward, approvalStatus, finalized);
     }
 }

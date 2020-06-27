@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("typeOfCompanyServices")
 public class TypeOfCompanyServices implements Services<TypeOfCompanyDTO> {
@@ -29,7 +30,17 @@ public class TypeOfCompanyServices implements Services<TypeOfCompanyDTO> {
 
     @Override
     public List<TypeOfCompanyDTO> findAll() {
-        return null;
+        List<TypeOfCompany> all = typeOfCompanyRepository.findAll();
+        List<TypeOfCompanyDTO> typeOfCompanyDTOS = typeOfCompanyMapper.toDto(all, context);
+        return typeOfCompanyDTOS;
+    }
+
+    public TypeOfCompanyDTO findTypeOfCompanyById(Long id) {
+        TypeOfCompany typeOfCompany = typeOfCompanyRepository
+                .findById(id)
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Type Of Company", id));
+        TypeOfCompanyDTO typeOfCompanyDTO = typeOfCompanyMapper.toDto(typeOfCompany, context);
+        return typeOfCompanyDTO;
     }
 
     @Override
@@ -42,6 +53,13 @@ public class TypeOfCompanyServices implements Services<TypeOfCompanyDTO> {
 
     @Override
     public void delete(Long id) {
+        Optional<TypeOfCompany> byIdOptional = typeOfCompanyRepository.findById(id);
 
+        if (byIdOptional.isPresent()) {
+            TypeOfCompany typeOfCompanyToDelete = byIdOptional.get();
+            typeOfCompanyRepository.delete(typeOfCompanyToDelete);
+        } else {
+            logicExceptionComponent.throwExceptionEntityNotFound("Type Of Company", id);
+        }
     }
 }

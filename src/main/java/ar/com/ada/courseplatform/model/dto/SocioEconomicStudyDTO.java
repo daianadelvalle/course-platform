@@ -1,5 +1,6 @@
 package ar.com.ada.courseplatform.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -37,6 +38,7 @@ public class SocioEconomicStudyDTO implements Serializable {
     private Integer numbersOfFamilyInCharge;
 
     //relationship
+    @JsonIgnoreProperties({"student"})
     private StudentDTO studentDTO;
 
     @NotNull(message = "student_Id is required")

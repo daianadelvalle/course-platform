@@ -81,6 +81,14 @@ public class CompanyServices  {
 
 
     public void delete(Long id) {
+        Optional<Company> byIdOptional = companyRepository.findById(id);
+
+        if (byIdOptional.isPresent()) {
+            Company companyToDelete = byIdOptional.get();
+            companyRepository.delete(companyToDelete);
+        } else {
+            logicExceptionComponent.throwExceptionEntityNotFound("Company", id);
+        }
 
     }
 
@@ -121,6 +129,14 @@ public class CompanyServices  {
 
 
     public void deleteManager(Long id) {
+        Optional<Manager> byIdOptional = managerRepository.findById(id);
+
+        if (byIdOptional.isPresent()) {
+            Manager managerToDelete = byIdOptional.get();
+            managerRepository.delete(managerToDelete);
+        } else {
+            logicExceptionComponent.throwExceptionEntityNotFound("Manager", id);
+        }
 
     }
 

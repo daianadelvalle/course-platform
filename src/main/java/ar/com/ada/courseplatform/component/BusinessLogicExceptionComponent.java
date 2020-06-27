@@ -35,4 +35,18 @@ public class BusinessLogicExceptionComponent {
                 apiEntityError
         );
     }
+
+    public void throwExceptionNotAvailable(String courseName) {
+        ApiEntityError apiEntityError = new ApiEntityError(
+                courseName,
+                "Not available",
+                "Sorry. This course has no available places."
+        );
+
+        throw new BusinessLogicException(
+                courseName + " Not available",
+                HttpStatus.BAD_REQUEST,
+                apiEntityError
+        );
+    }
 }

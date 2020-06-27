@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("studentServices")
 public class StudentServices implements Services<StudentDTO> {
@@ -19,18 +20,30 @@ public class StudentServices implements Services<StudentDTO> {
     @Qualifier("businessLogicExceptionComponent")
     private BusinessLogicExceptionComponent logicExceptionComponent;
 
-    @Autowired @Qualifier("studentRepository")
+    @Autowired
+    @Qualifier("studentRepository")
     private StudentRepository studentRepository;
 
     private StudentMapper studentMapper = StudentMapper.MAPPER;
 
-    @Autowired @Qualifier("cycleAvoidingMappingContext")
+    @Autowired
+    @Qualifier("cycleAvoidingMappingContext")
     private CycleAvoidingMappingContext context;
 
 
     @Override
     public List<StudentDTO> findAll() {
-        return null;
+        List<Student> all = studentRepository.findAll();
+        List<StudentDTO> studentDTOList = studentMapper.toDto(all, context);
+        return studentDTOList;
+    }
+
+    public StudentDTO findStudentById(Long id) {
+        Student student = studentRepository
+                .findById(id)
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Course", id));
+        StudentDTO studentDTO = studentMapper.toDto(student, context);
+        return studentDTO;
     }
 
     @Override
@@ -43,6 +56,11 @@ public class StudentServices implements Services<StudentDTO> {
 
     @Override
     public void delete(Long id) {
+        Optional<Student> byIdOptional = studentRepository.findById(id);
 
+        if (byIdOptional.isPresent()) {
+            Student studentToDelete = byIdOptional.get();
+            studentRepository.delete(studentToDelete);
+        }
     }
 }
