@@ -43,7 +43,17 @@ public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDT
 
     @Override
     public List<SocioEconomicStudyDTO> findAll() {
-        return null;
+        List<SocioEconomicStudy> all = socioEconomicStudyRepository.findAll();
+        List<SocioEconomicStudyDTO> socioEconomicStudyDTOList = socioEconomicStudyMapper.toDto(all, context);
+        return socioEconomicStudyDTOList;
+    }
+
+    public SocioEconomicStudyDTO findStudyById(Long id) {
+        SocioEconomicStudy socioEconomicStudy = socioEconomicStudyRepository
+                .findById(id)
+                .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("SocioEconomicStudy", id));
+        SocioEconomicStudyDTO courseDTO = socioEconomicStudyMapper.toDto(socioEconomicStudy, context);
+        return courseDTO;
     }
 
     @Override
@@ -62,7 +72,14 @@ public class SocioEconomicStudyServices implements Services<SocioEconomicStudyDT
 
     @Override
     public void delete(Long id) {
+        Optional<SocioEconomicStudy> byIdOptional = socioEconomicStudyRepository.findById(id);
 
+        if (byIdOptional.isPresent()) {
+            SocioEconomicStudy socioEconomicStudyToDelete = byIdOptional.get();
+            socioEconomicStudyRepository.delete(socioEconomicStudyToDelete);
+        } else {
+            logicExceptionComponent.throwExceptionEntityNotFound("Socio Economic Study", id);
+        }
     }
 
     public SocioEconomicStudyDTO addStudentToStudy(Long student_id, Long socio_economic_study_id) {

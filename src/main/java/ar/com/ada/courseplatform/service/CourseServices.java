@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("courseServices")
 public class CourseServices implements Services<CourseDTO> {
@@ -21,7 +22,8 @@ public class CourseServices implements Services<CourseDTO> {
     @Qualifier("businessLogicExceptionComponent")
     private BusinessLogicExceptionComponent logicExceptionComponent;
 
-    @Autowired @Qualifier("courseRepository")
+    @Autowired
+    @Qualifier("courseRepository")
     private CourseRepository courseRepository;
 
     @Autowired
@@ -30,7 +32,8 @@ public class CourseServices implements Services<CourseDTO> {
 
     private CourseMapper courseMapper = CourseMapper.MAPPER;
 
-    @Autowired @Qualifier("cycleAvoidingMappingContext")
+    @Autowired
+    @Qualifier("cycleAvoidingMappingContext")
     private CycleAvoidingMappingContext context;
 
 
@@ -41,11 +44,11 @@ public class CourseServices implements Services<CourseDTO> {
         return courseDTOList;
     }
 
-    public CourseDTO findCompanyById(Long id) {
+    public CourseDTO findCourseById(Long id) {
         Course course = courseRepository
                 .findById(id)
                 .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Course", id));
-        CourseDTO courseDTO  = courseMapper.toDto(course, context);
+        CourseDTO courseDTO = courseMapper.toDto(course, context);
         return courseDTO;
     }
 
@@ -58,7 +61,7 @@ public class CourseServices implements Services<CourseDTO> {
         Course courseToSaved = courseMapper.toEntity(dto, context);
         courseToSaved.setCompany(company);
 
-        Integer directAward = courseToSaved.getQuota() -courseToSaved.getScolarship();
+        Integer directAward = courseToSaved.getQuota() - courseToSaved.getScolarship();
         courseToSaved.setDirectAward(directAward);
 
         Integer scolarshipAccountant = courseToSaved.getScolarship();
@@ -72,6 +75,15 @@ public class CourseServices implements Services<CourseDTO> {
 
     @Override
     public void delete(Long id) {
+        Optional<Course> byIdOptional = courseRepository.findById(id);
 
+        if (byIdOptional.isPresent()) {
+            Course actorToDelete = byIdOptional.get();
+            courseRepository.delete(actorToDelete);
+        } else {
+            logicExceptionComponent.throwExceptionEntityNotFound("Course", id);
+        }
     }
+
 }
+

@@ -60,7 +60,7 @@ public class CourseDTO implements Serializable {
     @Positive(message = "only positive values")
     private Integer scolarship;
 
-    //adjudicación directa inicializado a 0
+    //adjudicación directa inicializado
     @NotNull(message = "direct Award is required")
     private Integer directAward;
 

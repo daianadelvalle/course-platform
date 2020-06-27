@@ -27,7 +27,7 @@ public class SocioEconomicStudy implements Serializable {
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean incomes;
 
-    @Column(name = "amount_of_incomes", nullable = true, length = 100)
+    @Column(name = "amount_of_incomes", length = 100)
     private Double amountOfIncomes;
 
     @Column(name = "family_in_charge", nullable = false, columnDefinition = "TINYINT(1)")
