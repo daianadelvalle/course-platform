@@ -32,7 +32,7 @@ public class DataAuthorityLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         LOGGER.info("DataRoleLoader.run");
 
-        if (appEnv.equals("dev") || appEnv.equals("qa")) {
+        if (appEnv.trim().equals("dev") || appEnv.trim().equals("qa")) {
             LOGGER.info("Loading initial data Authority");
 
             Authority admin = new Authority()
@@ -43,11 +43,11 @@ public class DataAuthorityLoader implements ApplicationRunner {
                     .setId(2L)
                     .setName(AuthorityName.ROLE_MANAGER);
 
-            Authority user = new Authority()
+            Authority student = new Authority()
                     .setId(3L)
-                    .setName(AuthorityName.ROLE_USER);
+                    .setName(AuthorityName.ROLE_STUDENT);
 
-            List<Authority> authorityList = Arrays.asList(admin, manager, user);
+            List<Authority> authorityList = Arrays.asList(admin, manager, student);
             authorityRepository.saveAll(authorityList);
 
         }

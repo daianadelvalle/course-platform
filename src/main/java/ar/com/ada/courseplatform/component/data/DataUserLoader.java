@@ -43,7 +43,7 @@ public class DataUserLoader implements ApplicationRunner {
 
         LOGGER.info("DataUserLoader.run");
 
-        if (appEnv.equals("dev") || appEnv.equals("qa")) {
+        if (appEnv.trim().equals("dev") || appEnv.trim().equals("qa")) {
             LOGGER.info("Loading initial data Users");
 
             Authority adminAuthority = authorityRepository.findById(1L)
