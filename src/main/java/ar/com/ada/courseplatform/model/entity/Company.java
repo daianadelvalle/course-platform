@@ -49,8 +49,38 @@ public class Company implements Serializable {
     @OneToOne(mappedBy = "company")
     private Manager manager;
 
-    public void addManager(Manager manager) {
+    public Company addManager(Manager manager) {
         this.manager = manager;
+        return this;
     }
 
+    public Company setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Company setCuil(Long cuil) {
+        this.cuil = cuil;
+        return this;
+    }
+
+    public Company setAdress(String adress) {
+        this.adress = adress;
+        return this;
+    }
+
+    public Company setPhone(Integer phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public Company setCategory(String category) {
+        this.category = category;
+        return this;
+    }
+
+    public Company setFoundationYear(Year foundationYear) {
+        this.foundationYear = foundationYear;
+        return this;
+    }
 }
