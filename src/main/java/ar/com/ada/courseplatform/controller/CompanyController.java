@@ -6,6 +6,7 @@ import ar.com.ada.courseplatform.service.CompanyServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,14 +27,14 @@ public class CompanyController {
         List<CompanyDTO> all = companyService.findAll();
         return ResponseEntity.ok(all);
     }
-
-    @GetMapping({"/companies/{id}", "/companies/{id}/"})
     // localhost:8080/companies/1 y localhost:8080/companies/1/ [GET]
+    @GetMapping({"/companies/{id}", "/companies/{id}/"})
     public ResponseEntity getCompanyById(@PathVariable Long id) {
         CompanyDTO companyById = companyService.findCompanyById(id);
         return ResponseEntity.ok(companyById);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping({"/companies", "/companies/"}) // localhost:8080/companies y localhost:8080/companies/
     public ResponseEntity addNewCompany(@Valid @RequestBody CompanyDTO companyDTO) throws URISyntaxException {
         CompanyDTO companySaved = companyService.save(companyDTO);
@@ -55,6 +56,7 @@ public class CompanyController {
         return ResponseEntity.ok(managerById);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping({"/managers", "/managers/"}) // localhost:8080/managers y localhost:8080/managers/
     public ResponseEntity addNewManager(@Valid @RequestBody ManagerDTO managerDTO) throws URISyntaxException {
         ManagerDTO managerSaved = companyService.save(managerDTO);
@@ -70,6 +72,7 @@ public class CompanyController {
         return ResponseEntity.ok(managerDTOWithNewCompany);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping({"/companies/{id}", "/companies/{id}/"}) // localhost:8080/companies/1 y localhost:8080/companies/1/
     public ResponseEntity deleteCompany(@PathVariable Long id) {
         companyService.delete(id);

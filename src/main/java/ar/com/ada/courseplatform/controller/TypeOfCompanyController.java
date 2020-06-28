@@ -5,6 +5,7 @@ import ar.com.ada.courseplatform.service.TypeOfCompanyServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,6 +33,7 @@ public class TypeOfCompanyController {
         return ResponseEntity.ok(typeOfCompanyById);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping({"", "/"}) // localhost:8080/type-of-companies y localhost:8080/type-of-companies/ [POST]
     public ResponseEntity addNewTypeOfCompany(@Valid @RequestBody TypeOfCompanyDTO typeOfCompanyDTO) throws URISyntaxException {
         TypeOfCompanyDTO typeOfCompanySaved = typeOfCompanyServices.save(typeOfCompanyDTO);
@@ -40,6 +42,7 @@ public class TypeOfCompanyController {
                 .body(typeOfCompanySaved);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping({"/{id}", "/{id}/"})
     // localhost:8080/type-of-companies/1 y localhost:8080/type-of-companies/1/ [DELETE]
     public ResponseEntity deleteTypeOfCompany(@PathVariable Long id) {
