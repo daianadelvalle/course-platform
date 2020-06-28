@@ -5,6 +5,7 @@ import ar.com.ada.courseplatform.service.StudentHasCourseServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ public class StudentHasCourseController {
     private StudentHasCourseServices studentHasCourseServices;
 
     // localhost:8080/request-to-courses/students/1/courses/1 y localhost:8080/request-to-courses/students/1/courses/1 [PUT]
+    @PreAuthorize("hasRole('STUDENT')")
     @PutMapping({"/students/{studentId}/courses/{courseId}", "/students/{studentId}/courses/{courseId}/"})
     public ResponseEntity addRequestToCourse(
             @Valid @RequestBody StudentHasCourseDTO studentHasCourseDTO,

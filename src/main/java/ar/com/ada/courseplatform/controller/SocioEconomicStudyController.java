@@ -5,6 +5,7 @@ import ar.com.ada.courseplatform.service.SocioEconomicStudyServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,6 +34,7 @@ public class SocioEconomicStudyController {
         return ResponseEntity.ok(socioEconomicStudyById);
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @PostMapping({"", "/"}) // localhost:8080/socio-economic-studies y localhost:8080/socio-economic-studies/ [POST]
     public ResponseEntity addNewSocioEconomicStudy(@Valid @RequestBody SocioEconomicStudyDTO socioEconomicStudyDTO) throws URISyntaxException {
         SocioEconomicStudyDTO socioEconomicStudySaved = socioEconomicStudyServices.save(socioEconomicStudyDTO);
@@ -42,12 +44,14 @@ public class SocioEconomicStudyController {
     }
 
     // localhost:8080/companies/1/managers/1 y localhost:8080/companies/1/managers/1/ [PUT]
+    @PreAuthorize("hasRole('STUDENT')")
     @PutMapping({"/{socio_economic_study_id}/students/{student_id}", "/{socio_economic_study_id}/students/{student_id}"})
     public ResponseEntity addStudentToStudy(@PathVariable Long socio_economic_study_id, @PathVariable Long student_id) {
         SocioEconomicStudyDTO studyDTOWithNewStudent = socioEconomicStudyServices.addStudentToStudy(socio_economic_study_id, student_id);
         return ResponseEntity.ok(studyDTOWithNewStudent);
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @DeleteMapping({"/{id}", "/{id}/"})
     // localhost:8080/socio-economic-study/1 y localhost:8080/socio-economic-study/1/ [DELETE]
     public ResponseEntity deleteSocioEconomicStudy(@PathVariable Long id) {

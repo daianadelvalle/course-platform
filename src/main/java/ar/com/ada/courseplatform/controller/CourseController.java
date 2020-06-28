@@ -5,6 +5,7 @@ import ar.com.ada.courseplatform.service.CourseServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,6 +33,7 @@ public class CourseController {
         return ResponseEntity.ok(courseById);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @PostMapping({"", "/"}) // localhost:8080/courses y localhost:8080/courses/
     public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO courseDTO) throws URISyntaxException {
         CourseDTO courseSaved = courseServices.save(courseDTO);
@@ -40,6 +42,7 @@ public class CourseController {
                 .body(courseSaved);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @DeleteMapping({"/{id}", "/{id}/"}) // localhost:8080/courses/1 y localhost:8080/courses/1/ [DELETE]
     public ResponseEntity deleteCourse(@PathVariable Long id) {
         courseServices.delete(id);

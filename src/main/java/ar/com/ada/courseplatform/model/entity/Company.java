@@ -46,7 +46,7 @@ public class Company implements Serializable {
     private TypeOfCompany typeOfCompany;
 
     @JoinColumn(name = "manager_id", unique = true)
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "company")
     private Manager manager;
 
     public void addManager(Manager manager) {

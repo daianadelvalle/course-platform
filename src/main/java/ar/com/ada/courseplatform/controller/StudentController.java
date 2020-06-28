@@ -5,6 +5,7 @@ import ar.com.ada.courseplatform.service.StudentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,6 +33,7 @@ public class StudentController {
         return ResponseEntity.ok(studentById);
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @PostMapping({"", "/"}) // localhost:8080/students y localhost:8080/students/ [POST]
     public ResponseEntity addNewStudent(@Valid @RequestBody StudentDTO studentDTO) throws URISyntaxException {
         StudentDTO studentSaved = studentServices.save(studentDTO);
@@ -40,6 +42,7 @@ public class StudentController {
                 .body(studentSaved);
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @DeleteMapping({"/{id}", "/{id}/"}) // localhost:8080/students/1 y localhost:8080/students/1/ [DELETE]
     public ResponseEntity deleteStudent(@PathVariable Long id) {
         studentServices.delete(id);
