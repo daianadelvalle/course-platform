@@ -24,4 +24,24 @@ public class StudentHasCourseController {
         StudentHasCourseDTO studentHasCourseDTOSaved = studentHasCourseServices.requestToCourse(studentHasCourseDTO, studentId, courseId);
         return ResponseEntity.ok(studentHasCourseDTOSaved);
     }
+
+    // localhost:8080/request-to-courses/students/1/courses/1/admitted y localhost:8080/request-to-courses/students/1/courses/1/admitted [PUT]
+    @PutMapping({"/students/{studentId}/courses/{courseId}/admitted", "/students/{studentId}/courses/{courseId}/admitted/"})
+    public ResponseEntity addApprovalStatusToScolarship(
+            @Valid @RequestBody StudentHasCourseDTO studentHasCourseDTO,
+            @PathVariable Long studentId, @PathVariable Long courseId) {
+        StudentHasCourseDTO studentHasCourseDTOSaved = studentHasCourseServices.saveApprovalStatusScolarship(studentHasCourseDTO, studentId, courseId);
+        return ResponseEntity.ok(studentHasCourseDTOSaved);
+    }
+
+    // localhost:8080/request-to-courses/students/1/courses/1/finalized/true y localhost:8080/request-to-courses/students/1/courses/1/finalized/true [PUT]
+    @PutMapping({"/students/{studentId}/courses/{courseId}/finalized/true", "/students/{studentId}/courses/{courseId}/finalized/true/"})
+    public ResponseEntity courseFinalized(
+            @Valid @RequestBody StudentHasCourseDTO studentHasCourseDTO,
+            @PathVariable Long studentId, @PathVariable Long courseId) {
+        StudentHasCourseDTO studentHasCourseDTOSaved = studentHasCourseServices.courseFinalized(studentHasCourseDTO, studentId, courseId);
+        return ResponseEntity.ok(studentHasCourseDTOSaved);
+    }
+
+
 }

@@ -11,9 +11,12 @@ import ar.com.ada.courseplatform.model.mapper.StudentHasCourseMapper;
 import ar.com.ada.courseplatform.model.repository.CourseRepository;
 import ar.com.ada.courseplatform.model.repository.StudentHasCourseRepository;
 import ar.com.ada.courseplatform.model.repository.StudentRepository;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service("studentHasCourseServices")
 public class StudentHasCourseServices {
@@ -77,7 +80,7 @@ public class StudentHasCourseServices {
         studentHasCourseToSave.setFinalized(false);
         StudentHasCourse studentHasCourseSaved = studentHasCourseRepository.save(studentHasCourseToSave);
 
-        int directAward = course.getDirectAward() -1;
+        int directAward = course.getDirectAward() - 1;
         course.setDirectAward(directAward);
         courseRepository.save(course);
 
@@ -111,5 +114,48 @@ public class StudentHasCourseServices {
         return studentHasCourseDTO;
     }
 
+    public StudentHasCourseDTO saveApprovalStatusScolarship(StudentHasCourseDTO dto, Long studentId, Long courseId) {
+        StudentHasCourseId studentHasCourseId = new StudentHasCourseId()
+                .setStudentId(studentId)
+                .setCourseId(courseId);
+
+        StudentHasCourse studentHasCourse = studentHasCourseRepository
+                .findById(studentHasCourseId)
+                .orElseThrow(() -> logicExceptionComponent.throwExceptionEntityNotFound("StudentHasCourse", studentHasCourseId));
+        Integer scolarshipAccountant = studentHasCourse.getCourse().getScolarshipAccountant();
+
+        if (scolarshipAccountant == 0)
+            logicExceptionComponent.throwExceptionNotAvailable(studentHasCourse.getCourse().getName());
+        if (dto.getApprovalStatus()) {
+            studentHasCourse.setApprovalStatus(true);
+            studentHasCourse.getCourse().setScolarshipAccountant(scolarshipAccountant - 1);
+
+        } else {
+            studentHasCourse.setApprovalStatus(false);
+        }
+
+        StudentHasCourseDTO studentHasCourseDTO = studentHasCourseMapper.toDto(studentHasCourse, context);
+
+        return studentHasCourseDTO;
+
+    }
+
+    public StudentHasCourseDTO courseFinalized(StudentHasCourseDTO dto, Long studentId, Long courseId) {
+
+        StudentHasCourseId studentHasCourseId = new StudentHasCourseId()
+                .setStudentId(studentId)
+                .setCourseId(courseId);
+
+        StudentHasCourse studentHasCourse = studentHasCourseRepository
+                .findById(studentHasCourseId)
+                .orElseThrow(() -> logicExceptionComponent.throwExceptionEntityNotFound("StudentHasCourse", studentHasCourseId));
+        if (!studentHasCourse.getFinalized())
+            studentHasCourse.setFinalized(true);
+
+        StudentHasCourseDTO studentHasCourseDTO = studentHasCourseMapper.toDto(studentHasCourse, context);
+
+        return studentHasCourseDTO;
+
+    }
 }
 
