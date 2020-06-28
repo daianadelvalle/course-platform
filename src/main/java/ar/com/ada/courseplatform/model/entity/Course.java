@@ -56,7 +56,7 @@ public class Course implements Serializable {
     @Column(name = "scolarship_accountant", nullable = false)
     private Integer scolarshipAccountant;
 
-    @Column(name = "available", columnDefinition = "TINYINT(1)")
+    @Column(name = "available", nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean available;
 
     //relationship
