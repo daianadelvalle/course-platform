@@ -34,7 +34,7 @@ public class Company implements Serializable {
     @Column(nullable = false, length = 80)
     private String category;
 
-    @Column(name = "foundation_year", nullable = false, length = 4)
+    @Column(name = "foundation_year", nullable = false)
     private Year foundationYear;
 
     //relationship
@@ -45,7 +45,6 @@ public class Company implements Serializable {
     @JoinColumn(name = "type_of_company_id")
     private TypeOfCompany typeOfCompany;
 
-    @JoinColumn(name = "manager_id", unique = true)
     @OneToOne(mappedBy = "company")
     private Manager manager;
 
@@ -83,4 +82,23 @@ public class Company implements Serializable {
         this.foundationYear = foundationYear;
         return this;
     }
+
+    public Company setTypeOfCompany(TypeOfCompany typeOfCompany) {
+        this.typeOfCompany = typeOfCompany;
+        return this;
+    }
+
+    /*
+    JSON
+  {
+	"name":"SantIT",
+	"cuil":27379289083,
+	"adress":"Calle falsa 456",
+	"phone":1554178231,
+	"category":"Sistemas",
+	"foundation_year": 1990,
+	"type_of_company_id":1
+  }
+
+	*/
 }

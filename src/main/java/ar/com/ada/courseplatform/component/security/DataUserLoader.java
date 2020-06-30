@@ -1,4 +1,4 @@
-package ar.com.ada.courseplatform.component.data;
+package ar.com.ada.courseplatform.component.security;
 
 import ar.com.ada.courseplatform.model.entity.security.Authority;
 import ar.com.ada.courseplatform.model.entity.security.User;
@@ -43,7 +43,7 @@ public class DataUserLoader implements ApplicationRunner {
 
         LOGGER.info("DataUserLoader.run");
 
-        if (appEnv.trim().equals("dev") || appEnv.trim().equals("qa")) {
+        if (appEnv.trim().equals("dev") || appEnv.trim().equals("qa") || appEnv.trim().equals("test")) {
             LOGGER.info("Loading initial data Users");
 
             Authority adminAuthority = authorityRepository.findById(1L)

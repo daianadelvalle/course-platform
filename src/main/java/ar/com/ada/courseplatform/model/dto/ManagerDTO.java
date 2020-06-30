@@ -48,4 +48,45 @@ public class ManagerDTO {
 
     //relationship
     private CompanyDTO companyDTO;
+
+    public ManagerDTO setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public ManagerDTO setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+
+    }
+
+    public ManagerDTO setIdentificationType(String identificationType) {
+        this.identificationType = identificationType;
+        return this;
+
+    }
+
+    public ManagerDTO setIdentification(Integer identification) {
+        this.identification = identification;
+        return this;
+
+    }
+
+    public ManagerDTO setPosition(String position) {
+        this.position = position;
+        return this;
+
+    }
+
+    public ManagerDTO setEmail(String email) {
+        this.email = email;
+        return this;
+
+    }
+
+    public ManagerDTO setCompanyId(Long companyId) {
+        this.companyId = companyId;
+        return this;
+
+    }
 }

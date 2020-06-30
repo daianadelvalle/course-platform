@@ -21,4 +21,14 @@ public class JwtRequestBody {
     @Size(message = "password must be at least 4 characters long", min = 4)
     @NotBlank(message = "password is required")
     private String password;
+
+    public JwtRequestBody setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public JwtRequestBody setPassword(String password) {
+        this.password = password;
+        return this;
+    }
 }

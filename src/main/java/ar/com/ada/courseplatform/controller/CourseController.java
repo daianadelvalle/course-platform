@@ -34,7 +34,7 @@ public class CourseController {
     }
 
     @PreAuthorize("hasRole('MANAGER')")
-    @PostMapping({"", "/"}) // localhost:8080/courses y localhost:8080/courses/
+    @PostMapping({"", "/"}) // localhost:8080/courses y localhost:8080/courses/ [POST]
     public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO courseDTO) throws URISyntaxException {
         CourseDTO courseSaved = courseServices.save(courseDTO);
         return ResponseEntity

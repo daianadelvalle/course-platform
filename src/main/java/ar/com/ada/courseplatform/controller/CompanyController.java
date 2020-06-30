@@ -27,6 +27,7 @@ public class CompanyController {
         List<CompanyDTO> all = companyService.findAll();
         return ResponseEntity.ok(all);
     }
+
     // localhost:8080/companies/1 y localhost:8080/companies/1/ [GET]
     @GetMapping({"/companies/{id}", "/companies/{id}/"})
     public ResponseEntity getCompanyById(@PathVariable Long id) {
@@ -35,7 +36,7 @@ public class CompanyController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping({"/companies", "/companies/"}) // localhost:8080/companies y localhost:8080/companies/
+    @PostMapping({"/companies", "/companies/"}) // localhost:8080/companies y localhost:8080/companies/ [POST]
     public ResponseEntity addNewCompany(@Valid @RequestBody CompanyDTO companyDTO) throws URISyntaxException {
         CompanyDTO companySaved = companyService.save(companyDTO);
         return ResponseEntity
@@ -57,7 +58,7 @@ public class CompanyController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping({"/managers", "/managers/"}) // localhost:8080/managers y localhost:8080/managers/
+    @PostMapping({"/managers", "/managers/"}) // localhost:8080/managers y localhost:8080/managers/ [POST]
     public ResponseEntity addNewManager(@Valid @RequestBody ManagerDTO managerDTO) throws URISyntaxException {
         ManagerDTO managerSaved = companyService.save(managerDTO);
         return ResponseEntity

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// motor de bùsqueda
 @Service("searchEngineCoursePlatform")
 public class SearchEngineCoursePlatform {
 
