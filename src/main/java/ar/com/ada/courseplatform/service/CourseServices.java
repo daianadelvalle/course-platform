@@ -52,6 +52,7 @@ public class CourseServices implements Services<CourseDTO> {
         return courseDTO;
     }
 
+    // guarda el curso junto a la compañia que lo brinda
     @Override
     public CourseDTO save(CourseDTO dto) {
         Long companyId = dto.getCompanyId();

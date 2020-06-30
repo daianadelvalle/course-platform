@@ -68,4 +68,24 @@ public class Course implements Serializable {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    /*
+
+    JSON
+    {
+        "name": "Desarrollo Backend",
+            "description": "Curso presencial de 400 de desarrollo backend, Java 8 con base de datos como MySQL, Spring Boot, Hivernate, y implementaciòn de seguridad y API-rest",
+            "modality": "Prescencial",
+            "cost": 80000,
+            "workload": 400,
+            "category": "sistemas",
+            "quota": 30,
+            "scolarship": 15,
+            "direct_award": 0,
+            "scolarship_accountant": 0,
+            "available":true,
+            "company_id":1
+    }
+
+     */
+
 }

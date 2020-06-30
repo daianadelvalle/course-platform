@@ -60,7 +60,7 @@ public class CourseDTO implements Serializable {
     @Positive(message = "only positive values")
     private Integer scolarship;
 
-    //adjudicación directa inicializado
+    //adjudicación directa se seteara con la cantidad de cupos menos becas
     @NotNull(message = "direct Award is required")
     private Integer directAward;
 
@@ -71,6 +71,7 @@ public class CourseDTO implements Serializable {
     @NotNull(message = "company_id is required")
     private Long companyId;
 
+    //se inicializa a true hasta que no hay màs cupos disponibles
     private Boolean available;
 
     //relationship

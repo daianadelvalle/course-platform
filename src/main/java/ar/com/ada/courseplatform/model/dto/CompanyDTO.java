@@ -1,4 +1,5 @@
 package ar.com.ada.courseplatform.model.dto;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -50,5 +51,44 @@ public class CompanyDTO implements Serializable {
 
     private ManagerDTO managerDTO;
 
+    public CompanyDTO setName(String name) {
+        this.name = name;
+        return this;
+    }
 
+    public CompanyDTO setCuil(Long cuil) {
+        this.cuil = cuil;
+        return this;
+
+    }
+
+    public CompanyDTO setAdress(String adress) {
+        this.adress = adress;
+        return this;
+
+    }
+
+    public CompanyDTO setPhone(Integer phone) {
+        this.phone = phone;
+        return this;
+
+    }
+
+    public CompanyDTO setCategory(String category) {
+        this.category = category;
+        return this;
+
+    }
+
+    public CompanyDTO setFoundationYear(Year foundationYear) {
+        this.foundationYear = foundationYear;
+        return this;
+
+    }
+
+    public CompanyDTO setTypeOfCompanyId(Long typeOfCompanyId) {
+        this.typeOfCompanyId = typeOfCompanyId;
+        return this;
+
+    }
 }

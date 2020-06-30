@@ -41,4 +41,47 @@ public class Student implements Serializable {
 
     @OneToOne(mappedBy = "student")
     private SocioEconomicStudy socioEconomicStudy;
+
+    public Student setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Student setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Student setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public Student setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+        return this;
+    }
+
+    public Student setGender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public Student setAdress(String adress) {
+        this.adress = adress;
+        return this;
+    }
+
+        /*
+    JSON
+{
+    "id": 1,
+    "name": "Valentin",
+    "last_name": "Delvalle",
+    "birthdate": "2008-05-20",
+    "gender": "masculino",
+    "adress": "Olivera Lavie 1258"
+}
+
+	*/
 }

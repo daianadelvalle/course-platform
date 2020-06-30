@@ -35,10 +35,8 @@ public class Manager implements Serializable {
     @Column(nullable = false, length = 200)
     private String email;
 
-    private Long companyId;
-
-    @JoinColumn(name = "company_id", unique = true)
     @OneToOne
+    @JoinColumn(name = "company_id", unique = true) //TODO: SI FALLA SE BORRA EL UNIQUE
     private Company company;
 
     public void addCompany(Company company) {
@@ -46,4 +44,52 @@ public class Manager implements Serializable {
     }
 
 
+    public Manager setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Manager setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public Manager setIdentificationType(String identificationType) {
+        this.identificationType = identificationType;
+        return this;
+    }
+
+    public Manager setIdentification(Integer identification) {
+        this.identification = identification;
+        return this;
+    }
+
+    public Manager setPosition(String position) {
+        this.position = position;
+        return this;
+    }
+
+    public Manager setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public Manager setCompany(Company company) {
+        this.company = company;
+        return this;
+    }
+
+    /*
+    JSON
+{
+	"name": "Claudia",
+	"last_name": "Moratti",
+	"identification_type": "DNI",
+	"identification": 38598741,
+	"position": "representante legal",
+	"email": "claud.ia@glov.com",
+	"company_id": 1
+}
+
+	*/
 }

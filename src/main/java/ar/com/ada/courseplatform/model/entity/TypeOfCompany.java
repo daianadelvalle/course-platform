@@ -24,5 +24,25 @@ public class TypeOfCompany implements Serializable {
     @OneToMany(mappedBy = "typeOfCompany", cascade = CascadeType.ALL)
     private Set<Company> companies;
 
+    public TypeOfCompany(String category) {
+        this.category = category;
+    }
 
+    public TypeOfCompany setCategory(String category) {
+        this.category = category;
+        return this;
+    }
+
+    public TypeOfCompany setCompanies(Set<Company> companies) {
+        this.companies = companies;
+        return this;
+    }
+
+    /*
+    JSON
+    {
+	"category": "Sociedad Cooperativa"
+	}
+
+	*/
 }

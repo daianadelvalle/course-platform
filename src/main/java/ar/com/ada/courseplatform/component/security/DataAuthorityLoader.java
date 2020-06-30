@@ -1,4 +1,4 @@
-package ar.com.ada.courseplatform.component.data;
+package ar.com.ada.courseplatform.component.security;
 
 import ar.com.ada.courseplatform.model.entity.security.Authority;
 import ar.com.ada.courseplatform.model.entity.security.AuthorityName;
@@ -32,7 +32,7 @@ public class DataAuthorityLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         LOGGER.info("DataRoleLoader.run");
 
-        if (appEnv.trim().equals("dev") || appEnv.trim().equals("qa")) {
+        if (appEnv.trim().equals("dev") || appEnv.trim().equals("qa") || appEnv.trim().equals("test")) {
             LOGGER.info("Loading initial data Authority");
 
             Authority admin = new Authority()

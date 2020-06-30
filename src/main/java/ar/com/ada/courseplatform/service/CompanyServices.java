@@ -66,7 +66,7 @@ public class CompanyServices  {
         return companyDTO;
     }
 
-
+// guardar la compañia con el tipo de compañia
     public CompanyDTO save(CompanyDTO dto) {
         Long typeOfCompanyId = dto.getTypeOfCompanyId();
         TypeOfCompany typeOfCompany = typeOfCompanyRepository
@@ -115,6 +115,7 @@ public class CompanyServices  {
         return managerDTO;
     }
 
+    // guarda el manager junto a la compañia que representa
     public ManagerDTO save(ManagerDTO dto) {
         Long companyId = dto.getCompanyId();
         Company company = companyRepository
@@ -144,6 +145,7 @@ public class CompanyServices  {
         return null;
     }
 
+    // actualizacòn alternativa de relacionar manager a la compañia
     public ManagerDTO addManagerToCompany(Long company_id, Long manager_id) {
         Optional<Company> companyByIdOptional = companyRepository.findById(company_id);
         Optional<Manager> managerByIdOptional = managerRepository.findById(manager_id);

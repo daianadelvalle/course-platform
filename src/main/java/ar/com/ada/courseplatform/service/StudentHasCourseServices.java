@@ -11,12 +11,9 @@ import ar.com.ada.courseplatform.model.mapper.StudentHasCourseMapper;
 import ar.com.ada.courseplatform.model.repository.CourseRepository;
 import ar.com.ada.courseplatform.model.repository.StudentHasCourseRepository;
 import ar.com.ada.courseplatform.model.repository.StudentRepository;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service("studentHasCourseServices")
 public class StudentHasCourseServices {
@@ -44,7 +41,7 @@ public class StudentHasCourseServices {
     @Qualifier("cycleAvoidingMappingContext")
     private CycleAvoidingMappingContext context;
 
-    //solicitudes al curso
+    //solicitudes al curso o por compra o por beca
     public StudentHasCourseDTO requestToCourse(StudentHasCourseDTO dto, Long studentId, Long courseId) {
         Student student = studentRepository
                 .findById(studentId)
@@ -63,6 +60,7 @@ public class StudentHasCourseServices {
         return studentHasCourseDTO;
     }
 
+    //lògica para la compra directa
     public StudentHasCourseDTO saveStudentHasCourseToRequestAdward(Student student, Course course) {
         if (course.getAvailable() == false && course.getDirectAward() == 0) {
             logicExceptionComponent.throwExceptionNotAvailable(course.getName());
@@ -94,6 +92,7 @@ public class StudentHasCourseServices {
         return studentHasCourseDTO;
     }
 
+    //logica para la solicitud de beca
     public StudentHasCourseDTO saveStudentHasCourseToScolarship(Student student, Course course) {
         StudentHasCourseId studentHasCourseId = new StudentHasCourseId()
                 .setStudentId(student.getId())
@@ -114,6 +113,7 @@ public class StudentHasCourseServices {
         return studentHasCourseDTO;
     }
 
+    //actualiza el status de aprovaciòn de la beca
     public StudentHasCourseDTO saveApprovalStatusScolarship(StudentHasCourseDTO dto, Long studentId, Long courseId) {
         StudentHasCourseId studentHasCourseId = new StudentHasCourseId()
                 .setStudentId(studentId)
@@ -140,6 +140,7 @@ public class StudentHasCourseServices {
 
     }
 
+    //actualiza el estado de finalizaciòn o no del curso
     public StudentHasCourseDTO courseFinalized(StudentHasCourseDTO dto, Long studentId, Long courseId) {
 
         StudentHasCourseId studentHasCourseId = new StudentHasCourseId()
