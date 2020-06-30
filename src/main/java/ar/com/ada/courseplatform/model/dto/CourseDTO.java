@@ -1,6 +1,11 @@
 package ar.com.ada.courseplatform.model.dto;
 
+import ar.com.ada.courseplatform.model.entity.StudentHasCourse;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +16,13 @@ import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.util.Set;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @JsonPropertyOrder({"id", "name", "description", "modality", "cost", "workload", "category",
-        "quota", "scolarship", "directAward", "scolarshipAccountant", "",})
+        "quota", "scolarship", "direct_award", "scolarship_accountant", "available", "student_has_courses"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class CourseDTO implements Serializable {
 
     //attr
@@ -33,8 +41,8 @@ public class CourseDTO implements Serializable {
     @NotNull(message = "cost is required")
     @Positive(message = "only positive values")
     private Double cost;
-    //carga horaria
 
+    //carga horaria
     @NotNull(message = "workload is required")
     @Positive(message = "only positive values")
     private Integer workload;
@@ -52,7 +60,7 @@ public class CourseDTO implements Serializable {
     @Positive(message = "only positive values")
     private Integer scolarship;
 
-    //adjudicación directa inicializado a 0
+    //adjudicación directa se seteara con la cantidad de cupos menos becas
     @NotNull(message = "direct Award is required")
     private Integer directAward;
 
@@ -60,39 +68,16 @@ public class CourseDTO implements Serializable {
     @NotNull(message = "scolarship Accountant is required")
     private Integer scolarshipAccountant;
 
+    @NotNull(message = "company_id is required")
+    private Long companyId;
+
+    //se inicializa a true hasta que no hay màs cupos disponibles
+    private Boolean available;
+
     //relationship
-    private Set<CompanyDTO> company;
+    private CompanyDTO company;
 
-    public CourseDTO(Long id, String name, String description, String modality, Double cost,
-                     Integer workload, String category, Integer quota, Integer scolarship,
-                     Integer directAward, Integer scolarshipAccountant, Set<CompanyDTO> company) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.modality = modality;
-        this.cost = cost;
-        this.workload = workload;
-        this.category = category;
-        this.quota = quota;
-        this.scolarship = scolarship;
-        this.directAward = directAward;
-        this.scolarshipAccountant = scolarshipAccountant;
-        this.company = company;
-    }
+    @JsonIgnoreProperties({ "student", "course"})
+    private Set<StudentHasCourse> studentHasCourses;
 
-    public CourseDTO(String name, String description, String modality, Double cost,
-                     Integer workload, String category, Integer quota, Integer scolarship,
-                     Integer directAward, Integer scolarshipAccountant, Set<CompanyDTO> company) {
-        this.name = name;
-        this.description = description;
-        this.modality = modality;
-        this.cost = cost;
-        this.workload = workload;
-        this.category = category;
-        this.quota = quota;
-        this.scolarship = scolarship;
-        this.directAward = directAward;
-        this.scolarshipAccountant = scolarshipAccountant;
-        this.company = company;
-    }
 }

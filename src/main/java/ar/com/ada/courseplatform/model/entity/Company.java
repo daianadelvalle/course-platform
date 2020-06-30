@@ -5,15 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
+import java.time.Year;
 import java.util.Set;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "Company")
-public class Company {
+public class Company implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,41 +22,83 @@ public class Company {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 15 )
-    private Integer cuil;
+    @Column(nullable = false)
+    private Long cuil;
 
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String adress;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private Integer phone;
 
     @Column(nullable = false, length = 80)
     private String category;
 
-    @Column(name = "foundation_year", nullable = false, columnDefinition = "YEAR")
-    private Date foundationYear;
+    @Column(name = "foundation_year", nullable = false)
+    private Year foundationYear;
 
     //relationship
     @OneToMany(mappedBy = "company")
-    private List<Course> courses = new ArrayList<>();
+    private Set<Course> courses;
 
     @ManyToOne
-    @JoinColumn(name = "type_of_company_id", nullable = false)
+    @JoinColumn(name = "type_of_company_id")
     private TypeOfCompany typeOfCompany;
 
+    @OneToOne(mappedBy = "company")
+    private Manager manager;
 
+    public Company addManager(Manager manager) {
+        this.manager = manager;
+        return this;
+    }
 
-    public Company(String name, Integer cuil, String adress, Integer phone, String category, Date foundationYear) {
+    public Company setName(String name) {
         this.name = name;
-        this.cuil = cuil;
-        this.adress = adress;
-        this.phone = phone;
-        this.category = category;
-        this.foundationYear = foundationYear;
+        return this;
     }
 
-    public Company(Long id) {
-        this.id = id;
+    public Company setCuil(Long cuil) {
+        this.cuil = cuil;
+        return this;
     }
+
+    public Company setAdress(String adress) {
+        this.adress = adress;
+        return this;
+    }
+
+    public Company setPhone(Integer phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public Company setCategory(String category) {
+        this.category = category;
+        return this;
+    }
+
+    public Company setFoundationYear(Year foundationYear) {
+        this.foundationYear = foundationYear;
+        return this;
+    }
+
+    public Company setTypeOfCompany(TypeOfCompany typeOfCompany) {
+        this.typeOfCompany = typeOfCompany;
+        return this;
+    }
+
+    /*
+    JSON
+  {
+	"name":"SantIT",
+	"cuil":27379289083,
+	"adress":"Calle falsa 456",
+	"phone":1554178231,
+	"category":"Sistemas",
+	"foundation_year": 1990,
+	"type_of_company_id":1
+  }
+
+	*/
 }

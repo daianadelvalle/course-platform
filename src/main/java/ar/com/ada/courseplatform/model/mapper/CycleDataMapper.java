@@ -6,15 +6,12 @@ import org.mapstruct.InheritInverseConfiguration;
 import java.util.List;
 
 /**
-        *
-        * @param <D> Represent DTO class
+ * @param <D> Represent DTO class
  * @param <E> Represent Entity class
  */
-
-
 public interface CycleDataMapper<D, E> {
+
     /**
-     *
      * @param dto
      * @param context
      * @return
@@ -22,7 +19,6 @@ public interface CycleDataMapper<D, E> {
     E toEntity(D dto, @Context CycleAvoidingMappingContext context);
 
     /**
-     *
      * @param dtoList
      * @param context
      * @return
@@ -30,7 +26,6 @@ public interface CycleDataMapper<D, E> {
     List<E> toEntity(List<D> dtoList, @Context CycleAvoidingMappingContext context);
 
     /**
-     *
      * @param entity
      * @param context
      * @return
@@ -39,7 +34,6 @@ public interface CycleDataMapper<D, E> {
     D toDto(E entity, @Context CycleAvoidingMappingContext context);
 
     /**
-     *
      * @param entityList
      * @param context
      * @return
@@ -47,4 +41,3 @@ public interface CycleDataMapper<D, E> {
     @InheritInverseConfiguration
     List<D> toDto(List<E> entityList, @Context CycleAvoidingMappingContext context);
 }
-

@@ -5,12 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "Socio_economic_study")
-public class SocioEconomicStudy {
+public class SocioEconomicStudy implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,29 +27,71 @@ public class SocioEconomicStudy {
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean incomes;
 
-    @Column(name = "amount_of_incomes", nullable = true, length = 100)
+    @Column(name = "amount_of_incomes", length = 100)
     private Double amountOfIncomes;
 
     @Column(name = "family_in_charge", nullable = false, columnDefinition = "TINYINT(1)")
     private Boolean familyInCharge;
 
-    @Column(nullable = true, length = 30)
+    @Column(name = "numbers_of_family_in_charge", length = 30)
     private Integer numbersOfFamilyInCharge;
 
-    @JoinColumn(name = "student_id", unique =true, nullable = false)
+
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
-    public SocioEconomicStudy(Boolean study, Boolean work, Boolean incomes, Double amountOfIncomes, Boolean familyInCharge, Integer numbersOfFamilyInCharge) {
-        this.study = study;
-        this.work = work;
-        this.incomes = incomes;
-        this.amountOfIncomes = amountOfIncomes;
-        this.familyInCharge = familyInCharge;
-        this.numbersOfFamilyInCharge = numbersOfFamilyInCharge;
+    public SocioEconomicStudy setId(Long id) {
+        this.id = id;
+        return this;
     }
 
-    public SocioEconomicStudy(Long id) {
-        this.id = id;
+    public SocioEconomicStudy setStudy(Boolean study) {
+        this.study = study;
+        return this;
     }
+
+    public SocioEconomicStudy setWork(Boolean work) {
+        this.work = work;
+        return this;
+    }
+
+    public SocioEconomicStudy setIncomes(Boolean incomes) {
+        this.incomes = incomes;
+        return this;
+    }
+
+    public SocioEconomicStudy setAmountOfIncomes(Double amountOfIncomes) {
+        this.amountOfIncomes = amountOfIncomes;
+        return this;
+    }
+
+    public SocioEconomicStudy setFamilyInCharge(Boolean familyInCharge) {
+        this.familyInCharge = familyInCharge;
+        return this;
+    }
+
+    public SocioEconomicStudy setNumbersOfFamilyInCharge(Integer numbersOfFamilyInCharge) {
+        this.numbersOfFamilyInCharge = numbersOfFamilyInCharge;
+        return this;
+    }
+
+    public SocioEconomicStudy setStudent(Student student) {
+        this.student = student;
+        return this;
+    }
+
+    public void addStudent(Student student) {
+        this.student = student;
+    }
+/*
+    {
+        "id": 1,
+        "study": true,
+        "work": false,
+         "incomes": false,
+         "family_in_charge": false
+    }
+
+ */
 }

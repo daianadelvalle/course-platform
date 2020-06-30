@@ -5,13 +5,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "Course")
-public class Course {
+public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,12 +49,15 @@ public class Course {
 
 
     //adjudicación directa inicializado a 0
-    @Column(name = "direct_award", nullable = false, length = 40, precision = 0)
+    @Column(name = "direct_award", nullable = false, length = 40)
     private Integer directAward;
 
     //contador de becas
-    @Column(name = "scolarship_accountant", nullable = false, length = 40, precision = 0)
+    @Column(name = "scolarship_accountant", nullable = false)
     private Integer scolarshipAccountant;
+
+    @Column(name = "available", nullable = false, columnDefinition = "TINYINT(1)")
+    private Boolean available;
 
     //relationship
 
@@ -59,23 +65,27 @@ public class Course {
     private Set<StudentHasCourse> studentHasCourses = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "company_id")
     private Company company;
 
-    public Course(String name, String description, String modality, Double cost, Integer workload, String category, Integer quota, Integer scolarship, Integer directAward, Integer scolarshipAccountant) {
-        this.name = name;
-        this.description = description;
-        this.modality = modality;
-        this.cost = cost;
-        this.workload = workload;
-        this.category = category;
-        this.quota = quota;
-        this.scolarship = scolarship;
-        this.directAward = directAward;
-        this.scolarshipAccountant = scolarshipAccountant;
+    /*
+
+    JSON
+    {
+        "name": "Desarrollo Backend",
+            "description": "Curso presencial de 400 de desarrollo backend, Java 8 con base de datos como MySQL, Spring Boot, Hivernate, y implementaciòn de seguridad y API-rest",
+            "modality": "Prescencial",
+            "cost": 80000,
+            "workload": 400,
+            "category": "sistemas",
+            "quota": 30,
+            "scolarship": 15,
+            "direct_award": 0,
+            "scolarship_accountant": 0,
+            "available":true,
+            "company_id":1
     }
 
-    public Course(Long id) {
-        this.id = id;
-    }
+     */
+
 }

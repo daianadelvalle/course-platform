@@ -5,12 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity(name = "type_of_company")
-public class TypeOfCompany {
+public class TypeOfCompany implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +28,21 @@ public class TypeOfCompany {
         this.category = category;
     }
 
-    public TypeOfCompany(Long id) {
-        this.id = id;
+    public TypeOfCompany setCategory(String category) {
+        this.category = category;
+        return this;
     }
+
+    public TypeOfCompany setCompanies(Set<Company> companies) {
+        this.companies = companies;
+        return this;
+    }
+
+    /*
+    JSON
+    {
+	"category": "Sociedad Cooperativa"
+	}
+
+	*/
 }
