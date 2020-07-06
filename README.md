@@ -4,7 +4,7 @@ Es una API-REST que gestiona una plataforma para cursos brindados por empresas. 
 
 Para la implementación de este desarrollo se utilizó Java, Spring MVC, Spring Boot, Maven, JPA, Spring Security, Manejo de Use-Rol, Securización de end-points, MySQL, TDD con JUnit5 y Mockito.
 
-course-platform
+# course-platform
 
 It is an API-REST that manages a platform for courses provided by companies. Companies can upload courses through their representatives and once approved, students or applicants can apply for direct purchase or request a scholarship.
 
